@@ -1,0 +1,9 @@
+D:\DEV\serverpw\TestServerWCF_winform\bin\Debug\TestServerWCF_winform.exe.config
+D:\DEV\serverpw\TestServerWCF_winform\bin\Debug\TestServerWCF_winform.exe
+D:\DEV\serverpw\TestServerWCF_winform\bin\Debug\TestServerWCF_winform.pdb
+D:\DEV\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.csprojResolveAssemblyReference.cache
+D:\DEV\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.Form1.resources
+D:\DEV\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.Properties.Resources.resources
+D:\DEV\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.csproj.GenerateResource.Cache
+D:\DEV\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.exe
+D:\DEV\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.pdb

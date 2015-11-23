@@ -1,0 +1,6 @@
+D:\DEV\serverpw\serverwcf\bin\serverwcf.dll.config
+D:\DEV\serverpw\serverwcf\bin\serverwcf.dll
+D:\DEV\serverpw\serverwcf\bin\serverwcf.pdb
+D:\DEV\serverpw\serverwcf\obj\Debug\serverwcf.csprojResolveAssemblyReference.cache
+D:\DEV\serverpw\serverwcf\obj\Debug\serverwcf.dll
+D:\DEV\serverpw\serverwcf\obj\Debug\serverwcf.pdb

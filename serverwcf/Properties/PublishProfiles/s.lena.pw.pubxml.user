@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAUnbDtIUJDEO5uA53hBNiIgAAAAACAAAAAAAQZgAAAAEAACAAAACOcKwqfh9grseJH6GkRvK69SpJ2dcdlQJbDEht2g56EAAAAAAOgAAAAAIAACAAAACiASSSYVwLWrHnVHiNX2SI+pYR5892ao8vLuYDEWDSKSAAAADfQTh8hs9J7ggvM6b7vh0Vh9l7g1qQ2Zj+yDVRwpqYRUAAAACogerv88E+GrSsduc3KrGDNK+68AXg6ukokZsAEDDRYn4Uyo9zz8+FRmjzTaLpV7pIeHekDDrEvFnm+bMvDTUA</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp.lena.pw/subdomains/s/httpdocs</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/serverwcf.dll">
+      <publishTime>11/21/2015 23:51:40</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>11/21/2015 23:50:55</publishTime>
+    </File>
+    <File Include="Service1.svc">
+      <publishTime>11/19/2015 22:57:23</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/21/2015 23:51:48</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
