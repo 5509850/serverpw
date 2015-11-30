@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using TestServerWCF_winform.ServiceReference1;
-using TestServerWCF_winform.ServiceReference2;
+using TestServerWCF_winform.ServiceReference1; //local
+//using TestServerWCF_winform.ServiceReference2; //s.lena.pw
 
 namespace TestServerWCF_winform
 {
