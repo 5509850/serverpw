@@ -79,10 +79,10 @@ namespace TestServerWCF_winform.ServiceReference1 {
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
-        string GetData(int value);
+        string GetData(string data, string hash);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
+        System.Threading.Tasks.Task<string> GetDataAsync(string data, string hash);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
         TestServerWCF_winform.ServiceReference1.CompositeType GetDataUsingDataContract(TestServerWCF_winform.ServiceReference1.CompositeType composite);
@@ -118,12 +118,12 @@ namespace TestServerWCF_winform.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
+        public string GetData(string data, string hash) {
+            return base.Channel.GetData(data, hash);
         }
         
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
+        public System.Threading.Tasks.Task<string> GetDataAsync(string data, string hash) {
+            return base.Channel.GetDataAsync(data, hash);
         }
         
         public TestServerWCF_winform.ServiceReference1.CompositeType GetDataUsingDataContract(TestServerWCF_winform.ServiceReference1.CompositeType composite) {

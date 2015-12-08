@@ -23,10 +23,27 @@ namespace TestServerWCF_winform
         {
             Service1Client client = new Service1Client();
 
-            int vol = 0;
-            Int32.TryParse(textBox3.Text, out vol);
-            textBox1.Text = client.GetData(vol);
+            String data = String.Empty;
+            //http://habrahabr.ru/post/210760/
+            //gethash
+            string hash = Utils.GetHashString(data);
+            textBox1.Text = client.GetData(data, hash);
             client.Close();
+        }
+
+        private void Registration()
+        {
+            /*|0|-|1|-|2|-|3|-|4|-|5|-|6|-|7|-|8|-|
+0 - typedata (0 - регистрация, 1 авторизация)
+1 -  userID (0 - новый)
+2 - email
+3 - pwd - hash
+4 - TypeDeviceID
+5 - Token
+6 - AndroidID/MacAddress
+7 - Name (device)
+8 - ip address login
+*/
         }
     }
 }

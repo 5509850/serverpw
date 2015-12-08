@@ -22,8 +22,13 @@ namespace serverwcf
         //    return string.Format("You entered: {0}", value);
         //}
 
-        public string GetData(int value)
+        public string GetData(string data, string hash)
         {
+            if (!hash.Equals(Utils.GetHashString(data)))
+            {
+                return String.Empty;
+            }
+
             //get data from SQL  DB
 #if DEBUG
             connectionString = ConfigurationManager.ConnectionStrings["Local_alexandr_gorbunov_ConnectionString"].ConnectionString;
@@ -31,7 +36,9 @@ namespace serverwcf
             MyCom = new MLDBUtils.SQLCom(connectionString, "");
             Dictionary<string, object> dic = new Dictionary<string, object>();
             MyCom.setCommand("aGetData");
-            MyCom.AddParam(value);
+            MyCom.AddParam(data);
+            MyCom.AddParam(hash);
+
             dic = MyCom.GetResultD();
             if (dic == null || dic.Count == 0)
             {                

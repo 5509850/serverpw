@@ -14,7 +14,9 @@ namespace serverwcf
     {
 
         [OperationContract]
-        string GetData(int value);
+        string GetData(string data, string hash);
+
+        
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
