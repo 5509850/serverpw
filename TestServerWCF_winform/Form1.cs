@@ -23,7 +23,9 @@ namespace TestServerWCF_winform
         {
             Service1Client client = new Service1Client();
 
-            String data = String.Empty;
+            String data = Registration();
+            
+
             //http://habrahabr.ru/post/210760/
             //gethash
             string hash = Utils.GetHashString(data);
@@ -31,7 +33,7 @@ namespace TestServerWCF_winform
             client.Close();
         }
 
-        private void Registration()
+        private string Registration()
         {
             /*|0|-|1|-|2|-|3|-|4|-|5|-|6|-|7|-|8|-|
 0 - typedata (0 - регистрация, 1 авторизация)
