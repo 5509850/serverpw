@@ -31,7 +31,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox_email = new System.Windows.Forms.TextBox();
+            this.textBox_pwd = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,19 +61,31 @@
             this.textBox1.Size = new System.Drawing.Size(657, 20);
             this.textBox1.TabIndex = 2;
             // 
-            // textBox3
+            // textBox_email
             // 
-            this.textBox3.Location = new System.Drawing.Point(13, 106);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
+            this.textBox_email.Location = new System.Drawing.Point(13, 106);
+            this.textBox_email.Name = "textBox_email";
+            this.textBox_email.Size = new System.Drawing.Size(100, 20);
+            this.textBox_email.TabIndex = 5;
+            this.textBox_email.Tag = "email";
+            this.textBox_email.Text = "mail@tut.by";
+            // 
+            // textBox_pwd
+            // 
+            this.textBox_pwd.Location = new System.Drawing.Point(129, 106);
+            this.textBox_pwd.Name = "textBox_pwd";
+            this.textBox_pwd.Size = new System.Drawing.Size(100, 20);
+            this.textBox_pwd.TabIndex = 6;
+            this.textBox_pwd.Tag = "pass";
+            this.textBox_pwd.Text = "pass";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 262);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox_pwd);
+            this.Controls.Add(this.textBox_email);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
@@ -90,7 +103,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox_email;
+        private System.Windows.Forms.TextBox textBox_pwd;
     }
 }
 
