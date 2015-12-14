@@ -17,9 +17,8 @@ namespace serverwcf
         string GetData(string data, string hash);
 
         
-
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        //[OperationContract]
+        //CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Add your service operations here
     }
@@ -27,23 +26,54 @@ namespace serverwcf
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
-    public class CompositeType
+    public class Device
     {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
+        long iD = 0;
+        int typeDeviceID = 0;
+        long userID = 0;
+        string token = String.Empty;
+        string androidIDMacaddress = String.Empty;
+        string name = String.Empty;
+        DateTime dateCreate = DateTime.Now.Date;
+        public long UserID
         {
-            get { return boolValue; }
-            set { boolValue = value; }
+            get { return userID; }
+            set { userID = value; }
+        }
+        public string Token
+        {
+            get { return token; }
+            set { token = value; }
+        }
+        public string AndroidIDMacaddress
+        {
+            get { return androidIDMacaddress; }
+            set { androidIDMacaddress = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        public DateTime DateCreate
+        {
+            get { return dateCreate; }
+            set { dateCreate = value; }
         }
 
         [DataMember]
-        public string StringValue
+        public long  ID
         {
-            get { return stringValue; }
-            set { stringValue = value; }
+            get { return iD; }
+            set { iD = value; }
         }
+        [DataMember]
+        public int TypeDeviceID
+        {
+            get { return typeDeviceID; }
+            set { typeDeviceID = value; }
+        }
+
+      
     }
 }

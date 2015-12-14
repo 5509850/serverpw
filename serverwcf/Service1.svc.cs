@@ -29,6 +29,7 @@ namespace serverwcf
         const int IpIDX = 8;
 
 
+        const int EXISTUSER = 0;
         const int ERRORSQL = -1;
         const int ERRORDB  = -2; 
         //public string GetData(int value)
@@ -69,27 +70,22 @@ namespace serverwcf
             {
                 case REGISTRATION:
                     {
-                        result = Registration(listdata);
-                        long id = 0;
-                        if (Int64.TryParse(result, out id))
-                        {
-                            if (id == 0)
+                        Device device = Registration(listdata);
+                        result = String.Format("{0}|{1}|{2}", device.UserID, device.ID, device.Name);
+
+                        if (device.ID == EXISTUSER)
                             {
-                                result = "user Exist!";
+                                result = "0";
                             }
-                            if (id == ERRORSQL)
+                        if (device.ID == ERRORSQL)
                             {
-                                result = "Error SQL!";
+                                result = "-1";
                             }
-                            if (id == ERRORDB)
+                        if (device.ID == ERRORDB)
                             {
-                                result = "Error DB!";
+                                result = "-2";
                             }
-                        } 
-                        else
-                            {
-                                result = "Error Empty";
-                            }
+                        
                         break;
                     }
                 default:
@@ -101,9 +97,9 @@ namespace serverwcf
             return result;          
         }
 
-        
 
-        private string[] Registration(List<string> data)
+
+        private Device Registration(List<string> data)
         {   
     //@email NVARCHAR(50), 
     //@pwd NVARCHAR(50),	
@@ -111,13 +107,14 @@ namespace serverwcf
     //@Token NVARCHAR(300),	
     //@AndroidIDMacaddress NVARCHAR(100),	
     //@Name NVARCHAR(50)
+            Device dev = new Device();           
 
             int typeDevice = Convert.ToInt32(data[TypeDeviceIDX]);
             if (typeDevice < 1)
-            { 
-                return String.Empty;
-            }
-            string result = String.Empty;
+            {               
+                dev.Name = "type device not define";
+                return dev;
+            }       
             try
             {
                 MyCom = new MLDBUtils.SQLCom(connectionString, "");
@@ -135,45 +132,43 @@ namespace serverwcf
                 dic = MyCom.GetResultD();
 
                 if (dic == null || dic.Count == 0)
-                {
-                    return ERRORDB.ToString();
+                {                   
+                    dev.Name = "dic is null or empty";
+                    return dev;                    
                 }
 
-                result = dic["userID"].ToString();
-                string deviceID = dic["deviceID"].ToString();
-                
+                dev.UserID = Convert.ToInt64(dic["userID"].ToString());
 
-                if (result == null)
+                if (dev.UserID == EXISTUSER)
                 {
-                    result = ERRORDB.ToString();
+                    dev.Name = "User Exist";
+                    return dev;
+                }
+                if (dev.UserID == ERRORSQL)
+                {
+                    dev.Name = "Error SQL";
+                    return dev;
                 }
 
-            }
-            catch (Exception)
-            {
-                return ERRORDB.ToString();
-            }
+                dev.ID = Convert.ToInt64(dic["deviceID"]);
+                //dev.TypeDeviceID = Convert.ToInt32(dic["TypeDeviceID"]);
+                //dev.Token = dic["Token"].ToString();
+                //dev.AndroidIDMacaddress = dic["AndroidIDMacaddress"].ToString();
+                //dev.Name = dic["Name"].ToString();
+                //dev.DateCreate = Convert.ToDateTime(dic["dateCreate"]);                
 
-            //return value
-            //1-10000 userID
-            //0 = user (email) exist!!!
-            //-1 = error SQL!!!!
-            //-2 = error DB
-            
-            return result;
-        }
-
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
             }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
+            catch (Exception ex)
+            {     
+                dev.UserID = ERRORDB;
+                dev.Name = "Sql Exept. - ";
+                if (ex.Message != null)
+                {
+                    dev.Name += ex.Message;
+                }
+                return dev;
             }
-            return composite;
-        }
+            return dev;
+        }       
     }
 }
