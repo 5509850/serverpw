@@ -33,6 +33,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox_email = new System.Windows.Forms.TextBox();
             this.textBox_pwd = new System.Windows.Forms.TextBox();
+            this.textBox_name = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,11 +80,20 @@
             this.textBox_pwd.Tag = "pass";
             this.textBox_pwd.Text = "pass";
             // 
+            // textBox_name
+            // 
+            this.textBox_name.Location = new System.Drawing.Point(236, 105);
+            this.textBox_name.Name = "textBox_name";
+            this.textBox_name.Size = new System.Drawing.Size(100, 20);
+            this.textBox_name.TabIndex = 7;
+            this.textBox_name.Text = "WebClient1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 262);
+            this.Controls.Add(this.textBox_name);
             this.Controls.Add(this.textBox_pwd);
             this.Controls.Add(this.textBox_email);
             this.Controls.Add(this.textBox1);
@@ -105,6 +115,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox_email;
         private System.Windows.Forms.TextBox textBox_pwd;
+        private System.Windows.Forms.TextBox textBox_name;
     }
 }
 

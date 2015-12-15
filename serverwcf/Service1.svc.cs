@@ -18,6 +18,7 @@ namespace serverwcf
         protected MLDBUtils.SQLCom MyCom;
 
         private const string REGISTRATION = "0";
+        private const string AUTHENTICATION = "1";
 
         const int TYPEDATAIDX = 0;
         const int EMAILIDX = 2;
@@ -88,6 +89,26 @@ namespace serverwcf
                         
                         break;
                     }
+                case AUTHENTICATION:
+                    {
+                        Device device = (listdata);
+                        result = String.Format("{0}|{1}|{2}", device.UserID, device.ID, device.Name);
+
+                        if (device.ID == EXISTUSER)
+                        {
+                            result = "0";
+                        }
+                        if (device.ID == ERRORSQL)
+                        {
+                            result = "-1";
+                        }
+                        if (device.ID == ERRORDB)
+                        {
+                            result = "-2";
+                        }
+
+                        break;
+                    }
                 default:
                     {
                         return String.Empty;
@@ -154,12 +175,85 @@ namespace serverwcf
                 //dev.TypeDeviceID = Convert.ToInt32(dic["TypeDeviceID"]);
                 //dev.Token = dic["Token"].ToString();
                 //dev.AndroidIDMacaddress = dic["AndroidIDMacaddress"].ToString();
-                //dev.Name = dic["Name"].ToString();
+                dev.Name = dic["Name"].ToString();
                 //dev.DateCreate = Convert.ToDateTime(dic["dateCreate"]);                
 
             }
             catch (Exception ex)
             {     
+                dev.UserID = ERRORDB;
+                dev.Name = "Sql Exept. - ";
+                if (ex.Message != null)
+                {
+                    dev.Name += ex.Message;
+                }
+                return dev;
+            }
+            return dev;
+        }
+
+        //TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        private Device Authentication(List<string> data)
+        {
+            //@email NVARCHAR(50), 
+            //@pwd NVARCHAR(50),	
+            //@TypeDeviceID INT,
+            //@Token NVARCHAR(300),	
+            //@AndroidIDMacaddress NVARCHAR(100),	
+            //@Name NVARCHAR(50)
+            Device dev = new Device();
+
+            int typeDevice = Convert.ToInt32(data[TypeDeviceIDX]);
+            if (typeDevice < 1)
+            {
+                dev.Name = "type device not define";
+                return dev;
+            }
+            try
+            {
+                MyCom = new MLDBUtils.SQLCom(connectionString, "");
+                Dictionary<string, object> dic = new Dictionary<string, object>();
+                MyCom.setCommand("aRegistration");
+
+                MyCom.AddParam(Utils.TruncateLongString(data[EMAILIDX], 50));
+                MyCom.AddParam(Utils.TruncateLongString(data[PWDIDX], 50));
+                MyCom.AddParam(typeDevice);
+                MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 300));
+                MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));
+                MyCom.AddParam(Utils.TruncateLongString(data[NameIDX], 50));
+
+
+                dic = MyCom.GetResultD();
+
+                if (dic == null || dic.Count == 0)
+                {
+                    dev.Name = "dic is null or empty";
+                    return dev;
+                }
+
+                dev.UserID = Convert.ToInt64(dic["userID"].ToString());
+
+                if (dev.UserID == EXISTUSER)
+                {
+                    dev.Name = "User Exist";
+                    return dev;
+                }
+                if (dev.UserID == ERRORSQL)
+                {
+                    dev.Name = "Error SQL";
+                    return dev;
+                }
+
+                dev.ID = Convert.ToInt64(dic["deviceID"]);
+                //dev.TypeDeviceID = Convert.ToInt32(dic["TypeDeviceID"]);
+                //dev.Token = dic["Token"].ToString();
+                //dev.AndroidIDMacaddress = dic["AndroidIDMacaddress"].ToString();
+                dev.Name = dic["Name"].ToString();
+                //dev.DateCreate = Convert.ToDateTime(dic["dateCreate"]);                
+
+            }
+            catch (Exception ex)
+            {
                 dev.UserID = ERRORDB;
                 dev.Name = "Sql Exept. - ";
                 if (ex.Message != null)

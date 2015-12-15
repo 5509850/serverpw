@@ -30,7 +30,7 @@ namespace TestServerWCF_winform
         {
             Service1Client client = new Service1Client();
 
-            String data = Registration();
+            string data = Registration();
             
 
             //http://habrahabr.ru/post/210760/
@@ -78,7 +78,7 @@ namespace TestServerWCF_winform
                TYPEDEVICE_WebClient,//4
                EMPTY_TOKEN,//5
                GetMACAddress2(),//6
-               "Webclient1",//7
+               textBox_name.Text,//7
                GetIP()//8
                );
             /*|0|-|1|-|2|-|3|-|4|-|5|-|6|-|7|-|8|-|
