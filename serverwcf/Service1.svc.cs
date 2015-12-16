@@ -91,7 +91,7 @@ namespace serverwcf
                     }
                 case AUTHENTICATION:
                     {
-                        Device device = (listdata);
+                        Device device = Authentication(listdata);
                         result = String.Format("{0}|{1}|{2}", device.UserID, device.ID, device.Name);
 
                         if (device.ID == EXISTUSER)
@@ -201,6 +201,8 @@ namespace serverwcf
             //@Token NVARCHAR(300),	
             //@AndroidIDMacaddress NVARCHAR(100),	
             //@Name NVARCHAR(50)
+
+          
             Device dev = new Device();
 
             int typeDevice = Convert.ToInt32(data[TypeDeviceIDX]);
@@ -213,14 +215,13 @@ namespace serverwcf
             {
                 MyCom = new MLDBUtils.SQLCom(connectionString, "");
                 Dictionary<string, object> dic = new Dictionary<string, object>();
-                MyCom.setCommand("aRegistration");
+                MyCom.setCommand("aAuthentication");
 
                 MyCom.AddParam(Utils.TruncateLongString(data[EMAILIDX], 50));
                 MyCom.AddParam(Utils.TruncateLongString(data[PWDIDX], 50));
                 MyCom.AddParam(typeDevice);
                 MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 300));
-                MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));
-                MyCom.AddParam(Utils.TruncateLongString(data[NameIDX], 50));
+                MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));             
 
 
                 dic = MyCom.GetResultD();
