@@ -17,9 +17,11 @@ namespace TestServerWCF_winform
     public partial class Form1 : Form
     {
         private const int REGISTRATION = 0;
+        private const int AUTORIZATION = 1;
         private const int NEW_USER = 0;
         private const int TYPEDEVICE_WebClient = 1;
         private const int EMPTY_TOKEN = 0;
+        private const int EMPTY = 0;
 
         public Form1()
         {
@@ -91,7 +93,44 @@ namespace TestServerWCF_winform
 6 - AndroidID/MacAddress
 7 - Name (device)
 8 - ip address login
+//9 - GUID
 */
+        }
+
+        private string Login()
+        {
+            return String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}",
+               AUTORIZATION,//0
+               EMPTY,//1
+               textBox_email.Text,//2
+               Utils.GetHashString(textBox_pwd.Text),//3
+               TYPEDEVICE_WebClient,//4
+               EMPTY_TOKEN,//5
+               GetMACAddress2(),//6
+               EMPTY,//7
+               GetIP()//8
+               );
+            /*0|-|1|-|2|-|3|-|4|-|5|-|6|-
+0 - typedata (1 авторизация)
+1 - email
+2 - pwd - hash
+3 - TypeDeviceID
+4 - Token
+5 - AndroidID/MacAddress
+6 - ip address (for log)
+
+*/
+        }
+
+        //Sign UP!!!!!!!!!!!!!!!!!!!!!!!!!
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Service1Client client = new Service1Client();
+
+            string data = Login();
+            string hash = Utils.GetHashString(data);
+            textBox1.Text = client.GetData(data, hash);
+            client.Close();
         }
     }
 }
