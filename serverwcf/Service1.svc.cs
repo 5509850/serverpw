@@ -32,11 +32,7 @@ namespace serverwcf
 
         const int EXISTUSER = 0;
         const int ERRORSQL = -1;
-        const int ERRORDB  = -2; 
-        //public string GetData(int value)
-        //{
-        //    return string.Format("You entered: {0}", value);
-        //}
+        const int ERRORDB  = -2;        
 
         public string GetData(string data, string hash)
         {
@@ -118,8 +114,6 @@ namespace serverwcf
             return result;          
         }
 
-
-
         private Device Registration(List<string> data)
         {   
     //@email NVARCHAR(50), 
@@ -194,15 +188,7 @@ namespace serverwcf
 
         //TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         private Device Authentication(List<string> data)
-        {
-            //@email NVARCHAR(50), 
-            //@pwd NVARCHAR(50),	
-            //@TypeDeviceID INT,
-            //@Token NVARCHAR(300),	
-            //@AndroidIDMacaddress NVARCHAR(100),	
-            //@Name NVARCHAR(50)
-
-          
+        { 
             Device dev = new Device();
 
             int typeDevice = Convert.ToInt32(data[TypeDeviceIDX]);

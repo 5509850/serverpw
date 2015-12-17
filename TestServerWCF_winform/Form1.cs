@@ -109,17 +109,7 @@ namespace TestServerWCF_winform
                GetMACAddress2(),//6
                EMPTY,//7
                GetIP()//8
-               );
-            /*0|-|1|-|2|-|3|-|4|-|5|-|6|-
-0 - typedata (1 авторизация)
-1 - email
-2 - pwd - hash
-3 - TypeDeviceID
-4 - Token
-5 - AndroidID/MacAddress
-6 - ip address (for log)
-
-*/
+               );          
         }
 
         //Sign UP!!!!!!!!!!!!!!!!!!!!!!!!!
