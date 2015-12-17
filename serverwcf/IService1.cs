@@ -62,7 +62,7 @@ namespace serverwcf
         }
 
         [DataMember]
-        public long  ID
+        public long  DeviceID
         {
             get { return iD; }
             set { iD = value; }

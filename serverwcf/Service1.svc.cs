@@ -72,17 +72,17 @@ namespace serverwcf
                 case REGISTRATION:
                     {
                         Device device = Registration(listdata);
-                        result = String.Format("{0}|{1}|{2}", device.UserID, device.ID, device.Name);
+                        result = String.Format("{0}|{1}|{2}", device.UserID, device.DeviceID, device.Name);
 
-                        if (device.ID == EXISTUSER)
+                        if (device.DeviceID == EXISTUSER)
                             {
                                 result = "0";
                             }
-                        if (device.ID == ERRORSQL)
+                        if (device.DeviceID == ERRORSQL)
                             {
                                 result = "-1";
                             }
-                        if (device.ID == ERRORDB)
+                        if (device.DeviceID == ERRORDB)
                             {
                                 result = "-2";
                             }
@@ -92,17 +92,17 @@ namespace serverwcf
                 case AUTHENTICATION:
                     {
                         Device device = Authentication(listdata);
-                        result = String.Format("{0}|{1}|{2}", device.UserID, device.ID, device.Name);
+                        result = String.Format("{0}|{1}|{2}", device.UserID, device.DeviceID, device.Name);
 
-                        if (device.ID == EXISTUSER)
+                        if (device.DeviceID == EXISTUSER)
                         {
                             result = "0";
                         }
-                        if (device.ID == ERRORSQL)
+                        if (device.DeviceID == ERRORSQL)
                         {
                             result = "-1";
                         }
-                        if (device.ID == ERRORDB)
+                        if (device.DeviceID == ERRORDB)
                         {
                             result = "-2";
                         }
@@ -171,7 +171,7 @@ namespace serverwcf
                     return dev;
                 }
 
-                dev.ID = Convert.ToInt64(dic["deviceID"]);
+                dev.DeviceID = Convert.ToInt64(dic["deviceID"]);
                 //dev.TypeDeviceID = Convert.ToInt32(dic["TypeDeviceID"]);
                 //dev.Token = dic["Token"].ToString();
                 //dev.AndroidIDMacaddress = dic["AndroidIDMacaddress"].ToString();
@@ -221,7 +221,9 @@ namespace serverwcf
                 MyCom.AddParam(Utils.TruncateLongString(data[PWDIDX], 50));
                 MyCom.AddParam(typeDevice);
                 MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 300));
-                MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));             
+                MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));
+                MyCom.AddParam(Utils.TruncateLongString(data[IpIDX], 50));
+                
 
 
                 dic = MyCom.GetResultD();
@@ -245,7 +247,7 @@ namespace serverwcf
                     return dev;
                 }
 
-                dev.ID = Convert.ToInt64(dic["deviceID"]);
+                dev.DeviceID = Convert.ToInt64(dic["deviceID"]);
                 //dev.TypeDeviceID = Convert.ToInt32(dic["TypeDeviceID"]);
                 //dev.Token = dic["Token"].ToString();
                 //dev.AndroidIDMacaddress = dic["AndroidIDMacaddress"].ToString();
