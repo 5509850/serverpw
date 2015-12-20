@@ -28,7 +28,14 @@ namespace serverwcf
     [DataContract]
     public class Device
     {
-        long iD = 0;
+        int code = 0;
+
+        public int Code
+        {
+            get { return code; }
+            set { code = value; }
+        }
+        long deviceID = 0;
         int typeDeviceID = 0;
         long userID = 0;
         string token = String.Empty;
@@ -64,8 +71,8 @@ namespace serverwcf
         [DataMember]
         public long  DeviceID
         {
-            get { return iD; }
-            set { iD = value; }
+            get { return deviceID; }
+            set { deviceID = value; }
         }
         [DataMember]
         public int TypeDeviceID

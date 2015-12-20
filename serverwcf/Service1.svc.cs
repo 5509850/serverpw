@@ -70,17 +70,17 @@ namespace serverwcf
                         Device device = Registration(listdata);
                         result = String.Format("{0}|{1}|{2}", device.UserID, device.DeviceID, device.Name);
 
-                        if (device.DeviceID == EXISTUSER)
+                        if (device.UserID == EXISTUSER)
                             {
-                                result = "0";
+                                result = "0|0|0";
                             }
-                        if (device.DeviceID == ERRORSQL)
+                        if (device.UserID == ERRORSQL)
                             {
-                                result = "-1";
+                                result = "-1|0|0";
                             }
-                        if (device.DeviceID == ERRORDB)
+                        if (device.UserID == ERRORDB)
                             {
-                                result = "-2";
+                                result = "-2|0|0";
                             }
                         
                         break;
@@ -88,21 +88,8 @@ namespace serverwcf
                 case AUTHENTICATION:
                     {
                         Device device = Authentication(listdata);
-                        result = String.Format("{0}|{1}|{2}", device.UserID, device.DeviceID, device.Name);
-
-                        if (device.DeviceID == EXISTUSER)
-                        {
-                            result = "0";
-                        }
-                        if (device.DeviceID == ERRORSQL)
-                        {
-                            result = "-1";
-                        }
-                        if (device.DeviceID == ERRORDB)
-                        {
-                            result = "-2";
-                        }
-
+                        //{0}|{1}|{2}|{3} code-deviceID-DeviceName-token
+                        result = String.Format("{0}|{1}|{2}|{3}", device.Code, device.DeviceID, device.Name, (new Guid()).ToString());
                         break;
                     }
                 default:
@@ -187,6 +174,8 @@ namespace serverwcf
         }
 
         //TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
         private Device Authentication(List<string> data)
         { 
             Device dev = new Device();
@@ -209,8 +198,6 @@ namespace serverwcf
                 MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 300));
                 MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));
                 MyCom.AddParam(Utils.TruncateLongString(data[IpIDX], 50));
-                
-
 
                 dic = MyCom.GetResultD();
 
@@ -220,30 +207,16 @@ namespace serverwcf
                     return dev;
                 }
 
-                dev.UserID = Convert.ToInt64(dic["userID"].ToString());
+                //SELECT @OK AS 'returncode', @deviceID AS 'deviceID', @DeviceName AS 'DeviceName', '0' AS 'PGP'
 
-                if (dev.UserID == EXISTUSER)
-                {
-                    dev.Name = "User Exist";
-                    return dev;
-                }
-                if (dev.UserID == ERRORSQL)
-                {
-                    dev.Name = "Error SQL";
-                    return dev;
-                }
-
+                dev.Code = Convert.ToInt32(dic["returncode"]); 
                 dev.DeviceID = Convert.ToInt64(dic["deviceID"]);
-                //dev.TypeDeviceID = Convert.ToInt32(dic["TypeDeviceID"]);
-                //dev.Token = dic["Token"].ToString();
-                //dev.AndroidIDMacaddress = dic["AndroidIDMacaddress"].ToString();
-                dev.Name = dic["Name"].ToString();
-                //dev.DateCreate = Convert.ToDateTime(dic["dateCreate"]);                
+                dev.Name = dic["DeviceName"].ToString();                        
 
             }
             catch (Exception ex)
             {
-                dev.UserID = ERRORDB;
+                dev.Code = ERRORDB;
                 dev.Name = "Sql Exept. - ";
                 if (ex.Message != null)
                 {

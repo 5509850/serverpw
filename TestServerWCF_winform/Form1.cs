@@ -28,6 +28,7 @@ namespace TestServerWCF_winform
             InitializeComponent();
         }
 
+        //Sign UP
         private void button1_Click(object sender, EventArgs e)
         {
             Service1Client client = new Service1Client();
@@ -112,15 +113,59 @@ namespace TestServerWCF_winform
                );          
         }
 
-        //Sign UP!!!!!!!!!!!!!!!!!!!!!!!!!
+        //Sign IN!!!!!!!!!!!!!!!!!!!!!!!!!
         private void button2_Click(object sender, EventArgs e)
         {
             Service1Client client = new Service1Client();
 
             string data = Login();
             string hash = Utils.GetHashString(data);
+            /*            {0}|{1}|{2}|{3}  
+             * 0 код = 
+            1 - не существует логин
+            2 - не верный пароль
+            3 - заблокирован пользователь
+            4 - пользователь удален
+            5 - авторизация успешна
+             * 
+            1=deviceID
+            2 = DeviceName
+            3=PGP_key (open)
+             */
+
             textBox1.Text = client.GetData(data, hash);
             client.Close();
+        }
+
+        private long SignInGetDeviceId()
+        {
+            Service1Client client = new Service1Client();
+
+            string data = Login();
+            string hash = Utils.GetHashString(data);
+            /*            {0}|{1}|{2}|{3}  
+            
+            1=deviceID
+            2 = DeviceName
+            3=PGP_key (open)
+             */
+
+            string Result = textBox1.Text = client.GetData(data, hash);
+            client.Close();
+
+
+            string[] datadic = Result.Split('|');
+            if (datadic == null || datadic.Length == 0)
+            {
+                return 0;
+            }
+
+            if (datadic.Length > 2 && datadic[0] )
+        }
+
+        private void button_addhost_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
