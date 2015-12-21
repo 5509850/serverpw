@@ -23,6 +23,11 @@ namespace TestServerWCF_winform
         private const int EMPTY_TOKEN = 0;
         private const int EMPTY = 0;
 
+        private const string AUTORISATION_OK = "5";
+        private const int DEVICE_ID_idx  = 1;
+        private const int CODE_idx = 0;
+        
+
         public Form1()
         {
             InitializeComponent();
@@ -160,11 +165,69 @@ namespace TestServerWCF_winform
                 return 0;
             }
 
-            if (datadic.Length > 2 && datadic[0] )
+            long deviceID = 0;
+
+            if (datadic.Length > 2 && datadic[CODE_idx].Equals(AUTORISATION_OK))
+            {
+                Int64.TryParse(datadic[DEVICE_ID_idx], out deviceID);                
+            }
+            return deviceID;
         }
 
         private void button_addhost_Click(object sender, EventArgs e)
         {
+            long deviceID = SignInGetDeviceId();
+            if (deviceID < 1)
+            {
+                return;
+            }
+
+            "addDeviceA"
+
+                /*
+                 * ALTER PROCEDURE addDeviceA
+	@deviceID BIGINT,
+	@codeA INT,
+	@codeB INT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT      TOP (1)
+INTO            aRegistrationHost
+(userID, 
+codeA, 
+codeB, 
+isActive)
+VALUES     ((SELECT TOP (1) ISNULL(userID, 0) FROM [aDevice] where [deviceID] = @deviceID and [isActive] = 1),
+@codeA,
+@codeB,
+1)
+
+SELECT @@IDENTITY AS ID
+
+                 */
+
+
+                /*
+
+                SELECT TOP 1000 [registrationHostID]
+      ,[userID]
+      ,[codeA]
+      ,[codeB]
+      ,[typeDeviceID]
+      ,[Token]
+      ,[AndroidID]
+      ,[Macaddress]
+      ,[isActive]
+      ,[logTimeCreate]
+      ,[logTimeHost]
+      ,[logTimeComplete]
+  FROM [alexandr_gorbunov].[dbo].[aRegistrationHost]
+                 * */
 
         }
     }
