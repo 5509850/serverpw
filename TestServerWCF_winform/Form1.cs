@@ -18,6 +18,7 @@ namespace TestServerWCF_winform
     {
         private const int REGISTRATION = 0;
         private const int AUTORIZATION = 1;
+        private const int GETCODEA = 2;
         private const int NEW_USER = 0;
         private const int TYPEDEVICE_WebClient = 1;
         private const int EMPTY_TOKEN = 0;
@@ -174,6 +175,7 @@ namespace TestServerWCF_winform
             return deviceID;
         }
 
+        //Add Host
         private void button_addhost_Click(object sender, EventArgs e)
         {
             long deviceID = SignInGetDeviceId();
@@ -182,7 +184,30 @@ namespace TestServerWCF_winform
                 return;
             }
 
-            "addDeviceA"
+            Service1Client client = new Service1Client();
+
+            string data = String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}|9|{9}",
+               GETCODEA,//0
+               EMPTY,//1
+               EMPTY,//2
+               EMPTY,//3
+               EMPTY,//4
+               EMPTY,//5
+               EMPTY,//6
+               EMPTY,//7
+               GetIP(),//8
+               deviceID//9
+               );          
+
+            string hash = Utils.GetHashString(data);
+            /*            {0}|{1}|{2}|{3}  
+            0 код A = 
+            1 - 0 OK или код ошибки           
+             * 
+             */
+
+            textBox1.Text = client.GetData(data, hash);
+            client.Close();           
 
                 /*
                  * ALTER PROCEDURE addDeviceA

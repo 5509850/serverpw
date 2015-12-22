@@ -19,6 +19,7 @@ namespace serverwcf
 
         private const string REGISTRATION = "0";
         private const string AUTHENTICATION = "1";
+        private const string GETCODEA = "2";
 
         const int TYPEDATAIDX = 0;
         const int EMAILIDX = 2;
@@ -28,6 +29,7 @@ namespace serverwcf
         const int AndroidIDMacAddressIDX = 6;
         const int NameIDX = 7;
         const int IpIDX = 8;
+        const int DeviceIdIDX = 9;
 
 
         const int EXISTUSER = 0;
@@ -90,6 +92,22 @@ namespace serverwcf
                         Device device = Authentication(listdata);
                         //{0}|{1}|{2}|{3} code-deviceID-DeviceName-token
                         result = String.Format("{0}|{1}|{2}|{3}", device.Code, device.DeviceID, device.Name, (new Guid()).ToString());
+                        break;
+                    }
+
+                case GETCODEA:
+                    {
+                        long deviceID = 0;
+                        Int64.TryParse(data[DeviceIdIDX].ToString(), out deviceID);
+
+    //                    ALTER PROCEDURE [dbo].[addDeviceA]
+    //@deviceID BIGINT,
+    //@codeA INT,
+    //@codeB INT
+                        //Device device = Authentication(listdata);
+                        ////{0}|{1}|{2}|{3} code-deviceID-DeviceName-token
+                        //result = String.Format("{0}|{1}|{2}|{3}", device.Code, device.DeviceID, device.Name, (new Guid()).ToString());
+                        
                         break;
                     }
                 default:
