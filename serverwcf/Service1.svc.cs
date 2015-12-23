@@ -98,7 +98,9 @@ namespace serverwcf
                 case GETCODEA:
                     {
                         long deviceID = 0;
+                        string codeA = String.Format("{0}{0}{0}{0}{0}{0}{0}{0}{0}", GetRandomNumber());
                         Int64.TryParse(data[DeviceIdIDX].ToString(), out deviceID);
+
 
     //                    ALTER PROCEDURE [dbo].[addDeviceA]
     //@deviceID BIGINT,
@@ -243,6 +245,17 @@ namespace serverwcf
                 return dev;
             }
             return dev;
-        }       
+        }
+
+        private static readonly Random getrandom = new Random();
+        private static readonly object syncLock = new object();
+        public static int GetRandomNumber()
+        {
+            lock (syncLock)
+            { // synchronize
+                //int min, int max
+                return getrandom.Next(10);
+            }
+        }
     }
 }
