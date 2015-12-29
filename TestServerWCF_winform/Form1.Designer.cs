@@ -37,18 +37,20 @@
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button_addhost = new System.Windows.Forms.Button();
-            this.textBox_codeA = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox_Ahost = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox_Bhost = new System.Windows.Forms.TextBox();
-            this.textBox_codeB = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBox_codeB = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox_codeA = new System.Windows.Forms.TextBox();
+            this.button_addhost = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.textBox_Bhost = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_Ahost = new System.Windows.Forms.TextBox();
+            this.button_master_ok = new System.Windows.Forms.Button();
+            this.button_host_ok = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -133,6 +135,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button_master_ok);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.textBox_codeB);
             this.groupBox2.Controls.Add(this.label2);
@@ -141,51 +144,26 @@
             this.groupBox2.Controls.Add(this.button_addhost);
             this.groupBox2.Location = new System.Drawing.Point(283, 107);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 112);
+            this.groupBox2.Size = new System.Drawing.Size(252, 112);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MASTER";
             // 
-            // groupBox3
+            // label5
             // 
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.textBox_Bhost);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.textBox_Ahost);
-            this.groupBox3.Location = new System.Drawing.Point(516, 109);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(218, 110);
-            this.groupBox3.TabIndex = 11;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "HOST";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 88);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "code B";
             // 
-            // button_addhost
+            // textBox_codeB
             // 
-            this.button_addhost.Location = new System.Drawing.Point(6, 15);
-            this.button_addhost.Name = "button_addhost";
-            this.button_addhost.Size = new System.Drawing.Size(75, 23);
-            this.button_addhost.TabIndex = 0;
-            this.button_addhost.Text = "Add Host";
-            this.button_addhost.UseVisualStyleBackColor = true;
-            this.button_addhost.Click += new System.EventHandler(this.button_addhost_Click);
-            // 
-            // textBox_codeA
-            // 
-            this.textBox_codeA.Location = new System.Drawing.Point(53, 58);
-            this.textBox_codeA.Name = "textBox_codeA";
-            this.textBox_codeA.ReadOnly = true;
-            this.textBox_codeA.Size = new System.Drawing.Size(142, 20);
-            this.textBox_codeA.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 59);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "code A";
+            this.textBox_codeB.Location = new System.Drawing.Point(52, 84);
+            this.textBox_codeB.Name = "textBox_codeB";
+            this.textBox_codeB.Size = new System.Drawing.Size(142, 20);
+            this.textBox_codeB.TabIndex = 4;
             // 
             // label2
             // 
@@ -197,54 +175,47 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Enter it code A on HOST";
             // 
-            // textBox_Ahost
+            // label1
             // 
-            this.textBox_Ahost.Location = new System.Drawing.Point(84, 16);
-            this.textBox_Ahost.Name = "textBox_Ahost";
-            this.textBox_Ahost.Size = new System.Drawing.Size(128, 20);
-            this.textBox_Ahost.TabIndex = 0;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 59);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "code A";
             // 
-            // label3
+            // textBox_codeA
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "code A";
+            this.textBox_codeA.Location = new System.Drawing.Point(53, 58);
+            this.textBox_codeA.Name = "textBox_codeA";
+            this.textBox_codeA.ReadOnly = true;
+            this.textBox_codeA.Size = new System.Drawing.Size(142, 20);
+            this.textBox_codeA.TabIndex = 1;
             // 
-            // label4
+            // button_addhost
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 51);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "code B";
+            this.button_addhost.Location = new System.Drawing.Point(6, 15);
+            this.button_addhost.Name = "button_addhost";
+            this.button_addhost.Size = new System.Drawing.Size(75, 23);
+            this.button_addhost.TabIndex = 0;
+            this.button_addhost.Text = "Add Host";
+            this.button_addhost.UseVisualStyleBackColor = true;
+            this.button_addhost.Click += new System.EventHandler(this.button_addhost_Click);
             // 
-            // textBox_Bhost
+            // groupBox3
             // 
-            this.textBox_Bhost.Location = new System.Drawing.Point(84, 48);
-            this.textBox_Bhost.Name = "textBox_Bhost";
-            this.textBox_Bhost.ReadOnly = true;
-            this.textBox_Bhost.Size = new System.Drawing.Size(128, 20);
-            this.textBox_Bhost.TabIndex = 3;
-            // 
-            // textBox_codeB
-            // 
-            this.textBox_codeB.Location = new System.Drawing.Point(52, 84);
-            this.textBox_codeB.Name = "textBox_codeB";
-            this.textBox_codeB.Size = new System.Drawing.Size(142, 20);
-            this.textBox_codeB.TabIndex = 4;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 88);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "code B";
+            this.groupBox3.Controls.Add(this.button_host_ok);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.textBox_Bhost);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.textBox_Ahost);
+            this.groupBox3.Location = new System.Drawing.Point(543, 109);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(305, 110);
+            this.groupBox3.TabIndex = 11;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "HOST";
             // 
             // label6
             // 
@@ -255,6 +226,58 @@
             this.label6.Size = new System.Drawing.Size(127, 13);
             this.label6.TabIndex = 4;
             this.label6.Text = "Enter it code B on Master";
+            // 
+            // textBox_Bhost
+            // 
+            this.textBox_Bhost.Location = new System.Drawing.Point(84, 48);
+            this.textBox_Bhost.Name = "textBox_Bhost";
+            this.textBox_Bhost.ReadOnly = true;
+            this.textBox_Bhost.Size = new System.Drawing.Size(128, 20);
+            this.textBox_Bhost.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "code B";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "code A";
+            // 
+            // textBox_Ahost
+            // 
+            this.textBox_Ahost.Location = new System.Drawing.Point(84, 16);
+            this.textBox_Ahost.Name = "textBox_Ahost";
+            this.textBox_Ahost.Size = new System.Drawing.Size(128, 20);
+            this.textBox_Ahost.TabIndex = 0;
+            // 
+            // button_master_ok
+            // 
+            this.button_master_ok.Location = new System.Drawing.Point(201, 83);
+            this.button_master_ok.Name = "button_master_ok";
+            this.button_master_ok.Size = new System.Drawing.Size(45, 23);
+            this.button_master_ok.TabIndex = 6;
+            this.button_master_ok.Text = "OK";
+            this.button_master_ok.UseVisualStyleBackColor = true;
+            // 
+            // button_host_ok
+            // 
+            this.button_host_ok.Location = new System.Drawing.Point(232, 16);
+            this.button_host_ok.Name = "button_host_ok";
+            this.button_host_ok.Size = new System.Drawing.Size(56, 23);
+            this.button_host_ok.TabIndex = 5;
+            this.button_host_ok.Text = "OK";
+            this.button_host_ok.UseVisualStyleBackColor = true;
+            this.button_host_ok.Click += new System.EventHandler(this.button_host_ok_Click);
             // 
             // Form1
             // 
@@ -304,6 +327,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_Ahost;
+        private System.Windows.Forms.Button button_master_ok;
+        private System.Windows.Forms.Button button_host_ok;
     }
 }
 

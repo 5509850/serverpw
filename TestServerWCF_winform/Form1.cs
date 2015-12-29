@@ -255,5 +255,10 @@ SELECT @@IDENTITY AS ID
                  * */
 
         }
+
+        private void button_host_ok_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
