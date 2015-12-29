@@ -259,6 +259,7 @@
             this.textBox_Ahost.Name = "textBox_Ahost";
             this.textBox_Ahost.Size = new System.Drawing.Size(128, 20);
             this.textBox_Ahost.TabIndex = 0;
+            this.textBox_Ahost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_host_KeyPress);
             // 
             // button_master_ok
             // 
@@ -268,6 +269,7 @@
             this.button_master_ok.TabIndex = 6;
             this.button_master_ok.Text = "OK";
             this.button_master_ok.UseVisualStyleBackColor = true;
+            this.button_master_ok.Click += new System.EventHandler(this.button_master_ok_Click);
             // 
             // button_host_ok
             // 

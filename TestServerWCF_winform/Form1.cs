@@ -19,8 +19,11 @@ namespace TestServerWCF_winform
         private const int REGISTRATION = 0;
         private const int AUTORIZATION = 1;
         private const int GETCODEA = 2;
+        private const int GETCODEB = 3;
+        private const int CHECKCODEAB = 4;
         private const int NEW_USER = 0;
         private const int TYPEDEVICE_WebClient = 1;
+        private const int TYPEDEVICE_AndroidHost = 3;//???????????????????????????????????????
         private const int EMPTY_TOKEN = 0;
         private const int EMPTY = 0;
 
@@ -175,7 +178,7 @@ namespace TestServerWCF_winform
             return deviceID;
         }
 
-        //Add Host
+        //Add Host - get CodeA
         private void button_addhost_Click(object sender, EventArgs e)
         {
             long deviceID = SignInGetDeviceId();
@@ -201,7 +204,7 @@ namespace TestServerWCF_winform
 
             string hash = Utils.GetHashString(data);
             /*            {0}|{1}|{2}|{3}  
-            0 код A = 
+            0 кодA = 
             1 - 0 OK или код ошибки           
              * 
              */
@@ -256,9 +259,117 @@ SELECT @@IDENTITY AS ID
 
         }
 
+        //HOST - send codeA and get codeB
         private void button_host_ok_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(textBox_Ahost.Text) || textBox_Ahost.Text.Length != 6)
+            {
+                textBox_Ahost.Focus();
+                MessageBox.Show("not corrent code A!");
+                return;
+            }
+            try
+            {
+                Service1Client client = new Service1Client();
 
+                string data = String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}|9|{9}|10|{10}",
+                   GETCODEB,//0
+                   EMPTY,//1
+                   EMPTY,//2
+                   EMPTY,//3
+                   TYPEDEVICE_AndroidHost,//4
+                   GetToken(),//5
+                   GetAndroidID(),//6
+                   "AndroidHost 1",//7
+                   GetIP(),//8
+                   EMPTY,//9
+                   textBox_Ahost.Text//10 codeA
+                   );
+
+                string hash = Utils.GetHashString(data);
+
+                /*>1 = codeB
+                 * -1 = not valid codeA
+                 * -2 error
+                 * */
+                textBox_Bhost.Text =
+                    textBox1.Text = client.GetData(data, hash);
+                client.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //for test only!!!!
+        private string GetAndroidID()
+        {
+            return "AndroidIDGHRTUYHRTretgy34";
+        }
+
+        //for test only!!!!
+        private string GetToken()
+        {
+           return "dfgertgrf%$H$#YHG";
+        }
+
+        //check codeA and codeB - if OK - add new deviceID(send push for host deviceID)
+        private void button_master_ok_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBox_codeB.Text) || textBox_codeB.Text.Length != 6)
+            {
+                MessageBox.Show("not correct code B!");
+                textBox_codeB.Focus();
+                return;
+            }
+             try
+            {
+                Service1Client client = new Service1Client();
+
+                string data = String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}|9|{9}|10|{10}|11|{11}",
+                   CHECKCODEAB,//0
+                   EMPTY,//1
+                   EMPTY,//2
+                   EMPTY,//3
+                   EMPTY,//4
+                   EMPTY,//5
+                   EMPTY,//6
+                   EMPTY,//7
+                   GetIP(),//8
+                   SignInGetDeviceId(),//9 deviceID
+                   textBox_codeA.Text,//10 codeA
+                   textBox_codeB.Text//11 codeB
+                   );
+
+                string hash = Utils.GetHashString(data);
+
+                /*            {0}|{1}  
+            0  0 = OK; -1 not valid codeA(not exit) -2 not valid codeB -3 not valid master DeviceID 
+            1  Host DeviceID
+             * 
+             */             
+                textBox1.Text = client.GetData(data, hash);
+                client.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }            
+        }
+
+        private void textBox_host_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            //// only allow one decimal point
+            //if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            //{
+            //    e.Handled = true;
+            //}
         }
     }
 }

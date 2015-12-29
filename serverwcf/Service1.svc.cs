@@ -20,6 +20,8 @@ namespace serverwcf
         private const string REGISTRATION = "0";
         private const string AUTHENTICATION = "1";
         private const string GETCODEA = "2";
+        private const string GETCODEB = "3";
+        private const string CHECKCODEAB = "4";
 
         const int TYPEDATAIDX = 0;
         const int EMAILIDX = 2;
@@ -30,6 +32,8 @@ namespace serverwcf
         const int NameIDX = 7;
         const int IpIDX = 8;
         const int DeviceIdIDX = 9;
+        const int CodeAIDX = 10;
+        const int CodeBIDX = 11;
 
 
         const int EXISTUSER = 0;
@@ -98,8 +102,8 @@ namespace serverwcf
                 case GETCODEA:
                     {
                         long deviceID = 0;
-                        string codeA = String.Format("{0}{0}{0}{0}{0}{0}{0}{0}{0}", GetRandomNumber());
-                        Int64.TryParse(data[DeviceIdIDX].ToString(), out deviceID);
+                        string codeA = String.Format("{0}{0}{0}{0}{0}{0}{0}{0}{0}", GetRandomNumber());//???????
+                        Int64.TryParse(listdata[DeviceIdIDX].ToString(), out deviceID);
 
 
     //                    ALTER PROCEDURE [dbo].[addDeviceA]
@@ -112,6 +116,20 @@ namespace serverwcf
                         
                         break;
                     }
+
+                case GETCODEB:
+                    {
+
+                        result = GetCodeB(listdata);                       
+
+                        break;
+                    }
+
+                case CHECKCODEAB:
+                    {
+                        result = FinishAddHostDevice(listdata); 
+                        break;
+                    }
                 default:
                     {
                         return String.Empty;
@@ -119,6 +137,43 @@ namespace serverwcf
             }
 
             return result;          
+        }
+
+        private string FinishAddHostDevice(List<string> listdata)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string GetCodeB(List<string> data)
+        {            
+            try
+            {
+                MyCom = new MLDBUtils.SQLCom(connectionString, "");
+                Dictionary<string, object> dic = new Dictionary<string, object>();
+                MyCom.setCommand("addDeviceB");
+
+                MyCom.AddParam(Convert.ToInt32(data[TypeDeviceIDX]));
+                MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 300));
+                MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));
+                MyCom.AddParam(Utils.TruncateLongString(data[NameIDX], 50));
+                MyCom.AddParam(Convert.ToInt32(data[CodeAIDX]));
+                MyCom.AddParam(Utils.TruncateLongString(data[IpIDX], 50));
+                
+                dic = MyCom.GetResultD();
+
+                if (dic == null || dic.Count == 0)
+                {                  
+                   
+                    return "-2";                    
+                }
+
+              return  dic["codeB"].ToString();
+
+            }
+            catch (Exception ex)
+            {  
+                return "-2";
+            }
         }
 
         private Device Registration(List<string> data)
