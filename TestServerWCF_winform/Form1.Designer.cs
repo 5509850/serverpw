@@ -37,6 +37,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_master_ok = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_codeB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,13 +45,12 @@
             this.textBox_codeA = new System.Windows.Forms.TextBox();
             this.button_addhost = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button_host_ok = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_Bhost = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_Ahost = new System.Windows.Forms.TextBox();
-            this.button_master_ok = new System.Windows.Forms.Button();
-            this.button_host_ok = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -149,6 +149,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MASTER";
             // 
+            // button_master_ok
+            // 
+            this.button_master_ok.Location = new System.Drawing.Point(201, 83);
+            this.button_master_ok.Name = "button_master_ok";
+            this.button_master_ok.Size = new System.Drawing.Size(45, 23);
+            this.button_master_ok.TabIndex = 6;
+            this.button_master_ok.Text = "OK";
+            this.button_master_ok.UseVisualStyleBackColor = true;
+            this.button_master_ok.Click += new System.EventHandler(this.button_master_ok_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -169,7 +179,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(53, 41);
+            this.label2.Location = new System.Drawing.Point(50, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(125, 13);
             this.label2.TabIndex = 3;
@@ -178,7 +188,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 59);
+            this.label1.Location = new System.Drawing.Point(6, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 2;
@@ -186,7 +196,7 @@
             // 
             // textBox_codeA
             // 
-            this.textBox_codeA.Location = new System.Drawing.Point(53, 58);
+            this.textBox_codeA.Location = new System.Drawing.Point(52, 41);
             this.textBox_codeA.Name = "textBox_codeA";
             this.textBox_codeA.ReadOnly = true;
             this.textBox_codeA.Size = new System.Drawing.Size(142, 20);
@@ -217,11 +227,21 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "HOST";
             // 
+            // button_host_ok
+            // 
+            this.button_host_ok.Location = new System.Drawing.Point(232, 16);
+            this.button_host_ok.Name = "button_host_ok";
+            this.button_host_ok.Size = new System.Drawing.Size(56, 23);
+            this.button_host_ok.TabIndex = 5;
+            this.button_host_ok.Text = "OK";
+            this.button_host_ok.UseVisualStyleBackColor = true;
+            this.button_host_ok.Click += new System.EventHandler(this.button_host_ok_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(84, 82);
+            this.label6.Location = new System.Drawing.Point(81, 78);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(127, 13);
             this.label6.TabIndex = 4;
@@ -260,26 +280,6 @@
             this.textBox_Ahost.Size = new System.Drawing.Size(128, 20);
             this.textBox_Ahost.TabIndex = 0;
             this.textBox_Ahost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_host_KeyPress);
-            // 
-            // button_master_ok
-            // 
-            this.button_master_ok.Location = new System.Drawing.Point(201, 83);
-            this.button_master_ok.Name = "button_master_ok";
-            this.button_master_ok.Size = new System.Drawing.Size(45, 23);
-            this.button_master_ok.TabIndex = 6;
-            this.button_master_ok.Text = "OK";
-            this.button_master_ok.UseVisualStyleBackColor = true;
-            this.button_master_ok.Click += new System.EventHandler(this.button_master_ok_Click);
-            // 
-            // button_host_ok
-            // 
-            this.button_host_ok.Location = new System.Drawing.Point(232, 16);
-            this.button_host_ok.Name = "button_host_ok";
-            this.button_host_ok.Size = new System.Drawing.Size(56, 23);
-            this.button_host_ok.TabIndex = 5;
-            this.button_host_ok.Text = "OK";
-            this.button_host_ok.UseVisualStyleBackColor = true;
-            this.button_host_ok.Click += new System.EventHandler(this.button_host_ok_Click);
             // 
             // Form1
             // 
