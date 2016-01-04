@@ -9,8 +9,9 @@ using System.Net.NetworkInformation; //local
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TestServerWCF_winform.ServiceReference1;
+//using TestServerWCF_winform.ServiceReference1; //local PC
 //using TestServerWCF_winform.ServiceReference2; //s.lena.pw
+using TestServerWCF_winform.ServiceReference3; // local note
 
 namespace TestServerWCF_winform
 {
@@ -188,7 +189,7 @@ namespace TestServerWCF_winform
             }
 
             Service1Client client = new Service1Client();
-
+            //TODO: !!!!!!!!!!!!!!! textBox_hostname добавить имя хоста!!! textBox_hostname.Text
             string data = String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}|9|{9}",
                GETCODEA,//0
                EMPTY,//1

@@ -4,7 +4,8 @@ D:\DEV\serverpw\serverwcf\obj\Debug\serverwcf.dll
 D:\DEV\serverpw\serverwcf\obj\Debug\serverwcf.pdb
 D:\sgs2\dev\serverpw\serverwcf\bin\serverwcf.dll
 D:\sgs2\dev\serverpw\serverwcf\bin\serverwcf.pdb
-D:\sgs2\dev\serverpw\serverwcf\obj\Debug\serverwcf.csprojResolveAssemblyReference.cache
 D:\sgs2\dev\serverpw\serverwcf\obj\Debug\serverwcf.dll
 D:\sgs2\dev\serverpw\serverwcf\obj\Debug\serverwcf.pdb
 D:\DEV\serverpw\serverwcf\bin\serverwcf.dll.config
+D:\sgs2\dev\serverpw\serverwcf\bin\serverwcf.dll.config
+D:\sgs2\dev\serverpw\serverwcf\obj\Debug\serverwcf.csprojResolveAssemblyReference.cache

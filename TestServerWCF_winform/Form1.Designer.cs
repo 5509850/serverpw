@@ -51,6 +51,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_Ahost = new System.Windows.Forms.TextBox();
+            this.textBox_hostname = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -135,6 +137,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.textBox_hostname);
             this.groupBox2.Controls.Add(this.button_master_ok);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.textBox_codeB);
@@ -181,9 +185,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(50, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(125, 13);
+            this.label2.Size = new System.Drawing.Size(137, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Enter it code A on HOST";
+            this.label2.Text = "Enter it code A on HOST ->";
             // 
             // label1
             // 
@@ -199,7 +203,7 @@
             this.textBox_codeA.Location = new System.Drawing.Point(52, 41);
             this.textBox_codeA.Name = "textBox_codeA";
             this.textBox_codeA.ReadOnly = true;
-            this.textBox_codeA.Size = new System.Drawing.Size(142, 20);
+            this.textBox_codeA.Size = new System.Drawing.Size(176, 20);
             this.textBox_codeA.TabIndex = 1;
             // 
             // button_addhost
@@ -243,9 +247,9 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.Location = new System.Drawing.Point(81, 78);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(127, 13);
+            this.label6.Size = new System.Drawing.Size(139, 13);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Enter it code B on Master";
+            this.label6.Text = "<- Enter it code B on Master";
             // 
             // textBox_Bhost
             // 
@@ -280,6 +284,23 @@
             this.textBox_Ahost.Size = new System.Drawing.Size(128, 20);
             this.textBox_Ahost.TabIndex = 0;
             this.textBox_Ahost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_host_KeyPress);
+            // 
+            // textBox_hostname
+            // 
+            this.textBox_hostname.Location = new System.Drawing.Point(152, 17);
+            this.textBox_hostname.Name = "textBox_hostname";
+            this.textBox_hostname.Size = new System.Drawing.Size(76, 20);
+            this.textBox_hostname.TabIndex = 7;
+            this.textBox_hostname.Text = "host 1";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(88, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "имя хоста";
             // 
             // Form1
             // 
@@ -331,6 +352,8 @@
         private System.Windows.Forms.TextBox textBox_Ahost;
         private System.Windows.Forms.Button button_master_ok;
         private System.Windows.Forms.Button button_host_ok;
+        private System.Windows.Forms.TextBox textBox_hostname;
+        private System.Windows.Forms.Label label7;
     }
 }
 

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -132,9 +131,40 @@ namespace serverwcf
             return result;          
         }
 
-        private string FinishAddHostDevice(List<string> listdata)
+        private string FinishAddHostDevice(List<string> data)
         {
-            throw new NotImplementedException();
+            try
+            {
+                MyCom = new MLDBUtils.SQLCom(connectionString, "");
+                Dictionary<string, object> dic = new Dictionary<string, object>();
+                MyCom.setCommand("checkABfinish");
+
+                long deviceID = 0;
+                if (!Int64.TryParse(data[DeviceIdIDX], out deviceID))
+                {
+                    return String.Empty;
+                }
+
+                MyCom.AddParam(deviceID);         
+                MyCom.AddParam(Convert.ToInt32(data[CodeAIDX]));                          
+                MyCom.AddParam(Convert.ToInt32(data[CodeBIDX]));
+                MyCom.AddParam(Utils.TruncateLongString(data[IpIDX], 50));
+
+                dic = MyCom.GetResultD();
+
+                if (dic == null || dic.Count == 0)
+                {
+
+                    return "-2";
+                }
+                //for send push after and active deviceID
+                return dic["DeviceID"].ToString();
+
+            }
+            catch (Exception ex)
+            {
+                return "-2";
+            }
         }
 
         private string getA(List<string> listdata)
@@ -293,7 +323,7 @@ namespace serverwcf
 
                 dev.UserID = Convert.ToInt64(dic["userID"].ToString());
 
-                if (dev.UserID == EXISTUSER)
+                 if (dev.UserID == EXISTUSER)
                 {
                     dev.Name = "User Exist";
                     return dev;
