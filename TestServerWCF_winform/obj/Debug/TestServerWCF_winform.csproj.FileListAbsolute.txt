@@ -15,3 +15,4 @@ D:\sgs2\dev\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.Prope
 D:\sgs2\dev\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.csproj.GenerateResource.Cache
 D:\sgs2\dev\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.exe
 D:\sgs2\dev\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.pdb
+D:\sgs2\dev\serverpw\TestServerWCF_winform\obj\Debug\TestServerWCF_winform.csprojResolveAssemblyReference.cache

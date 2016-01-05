@@ -37,6 +37,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox_hostname = new System.Windows.Forms.TextBox();
             this.button_master_ok = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_codeB = new System.Windows.Forms.TextBox();
@@ -51,8 +53,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_Ahost = new System.Windows.Forms.TextBox();
-            this.textBox_hostname = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -153,8 +153,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "MASTER";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(88, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "имя хоста";
+            // 
+            // textBox_hostname
+            // 
+            this.textBox_hostname.Location = new System.Drawing.Point(152, 17);
+            this.textBox_hostname.Name = "textBox_hostname";
+            this.textBox_hostname.Size = new System.Drawing.Size(76, 20);
+            this.textBox_hostname.TabIndex = 7;
+            this.textBox_hostname.Text = "host 1";
+            // 
             // button_master_ok
             // 
+            this.button_master_ok.Enabled = false;
             this.button_master_ok.Location = new System.Drawing.Point(201, 83);
             this.button_master_ok.Name = "button_master_ok";
             this.button_master_ok.Size = new System.Drawing.Size(45, 23);
@@ -233,6 +251,7 @@
             // 
             // button_host_ok
             // 
+            this.button_host_ok.Enabled = false;
             this.button_host_ok.Location = new System.Drawing.Point(232, 16);
             this.button_host_ok.Name = "button_host_ok";
             this.button_host_ok.Size = new System.Drawing.Size(56, 23);
@@ -284,23 +303,6 @@
             this.textBox_Ahost.Size = new System.Drawing.Size(128, 20);
             this.textBox_Ahost.TabIndex = 0;
             this.textBox_Ahost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_host_KeyPress);
-            // 
-            // textBox_hostname
-            // 
-            this.textBox_hostname.Location = new System.Drawing.Point(152, 17);
-            this.textBox_hostname.Name = "textBox_hostname";
-            this.textBox_hostname.Size = new System.Drawing.Size(76, 20);
-            this.textBox_hostname.TabIndex = 7;
-            this.textBox_hostname.Text = "host 1";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(88, 18);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 13);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "имя хоста";
             // 
             // Form1
             // 

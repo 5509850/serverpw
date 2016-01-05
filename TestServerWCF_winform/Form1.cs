@@ -189,7 +189,7 @@ namespace TestServerWCF_winform
             }
 
             Service1Client client = new Service1Client();
-            //TODO: !!!!!!!!!!!!!!! textBox_hostname добавить имя хоста!!! textBox_hostname.Text
+            //TODO: !!!!!!!!!!!!!!! textBox_hostname добавить имя хоста!!! 
             string data = String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}|9|{9}",
                GETCODEA,//0
                EMPTY,//1
@@ -198,7 +198,7 @@ namespace TestServerWCF_winform
                EMPTY,//4
                EMPTY,//5
                EMPTY,//6
-               EMPTY,//7
+               textBox_hostname.Text,//name 7
                GetIP(),//8
                deviceID//9
                );          
@@ -211,8 +211,10 @@ namespace TestServerWCF_winform
              */
 
             textBox_codeA.Text = client.GetData(data, hash);
-            client.Close();                  
-
+            client.Close();
+            button_addhost.Enabled = false;
+            button_host_ok.Enabled = true;
+            textBox_codeB.Text = textBox_Ahost.Text = textBox_Bhost.Text = String.Empty;                 
         }
 
         //HOST - send codeA and get codeB
@@ -256,6 +258,15 @@ namespace TestServerWCF_winform
             {
                 MessageBox.Show(ex.Message);
             }
+            int coB = 0;
+            if(Int32.TryParse(textBox_Bhost.Text, out coB))
+            {
+                if (coB > 1)
+                    {
+                    button_host_ok.Enabled = false;
+                    button_master_ok.Enabled = true;
+                    }
+            } 
         }
 
         //for test only!!!!
@@ -300,18 +311,23 @@ namespace TestServerWCF_winform
 
                 string hash = Utils.GetHashString(data);
 
-                /*            {0}|{1}  
-            0  0 = OK; -1 not valid codeA(not exit) -2 not valid codeB -3 not valid master DeviceID 
-            1  Host DeviceID
+                /*             
+            0 - exist new deviceID (second press OK on Master with code B)
+            -1 - not valid code B
+            -2 - not valid code А (not exist) 
+            -3  sql error
+ 
+            > 1  new Host DeviceID
              * 
-             */             
+             */
                 textBox1.Text = client.GetData(data, hash);
                 client.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }            
+            }
+             button_addhost.Enabled = true;
         }
 
         private void textBox_host_KeyPress(object sender, KeyPressEventArgs e)

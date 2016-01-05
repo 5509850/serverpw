@@ -22,6 +22,10 @@ namespace serverwcf
         private const string GETCODEB = "3";
         private const string CHECKCODEAB = "4";
 
+        //-------------------------------code from host
+
+        private const string FROMHOST = "5";
+
         const int TYPEDATAIDX = 0;
         const int EMAILIDX = 2;
         const int PWDIDX = 3;
@@ -45,6 +49,8 @@ namespace serverwcf
 
         public string GetData(string data, string hash)
         {
+           // Request.ServerVariables('REMOTE_ADDR');
+           
             if (!hash.Equals(Utils.GetHashString(data)))
             {
                 return String.Empty;
@@ -122,6 +128,12 @@ namespace serverwcf
                         result = FinishAddHostDevice(listdata); 
                         break;
                     }
+                case FROMHOST:
+                    {
+                        result = RequestFromHost(listdata); 
+                        break;
+                    }
+                    
                 default:
                     {
                         return String.Empty;
@@ -129,6 +141,11 @@ namespace serverwcf
             }
 
             return result;          
+        }
+
+        private string RequestFromHost(List<string> data)
+        {
+            throw new NotImplementedException();
         }
 
         private string FinishAddHostDevice(List<string> data)
@@ -155,15 +172,29 @@ namespace serverwcf
                 if (dic == null || dic.Count == 0)
                 {
 
-                    return "-2";
+                    return "-1";
                 }
                 //for send push after and active deviceID
+                long newDeviceId = 0;
+                if (Int64.TryParse(dic["DeviceID"].ToString(), out newDeviceId))
+                {
+                    if (newDeviceId > 0)
+                    {
+                        if (dic["token"] != null)
+                        {
+                            Utils.responseGCM responce = Utils.SendGCM(newDeviceId.ToString(), "http:\\tut.by", "title", dic["token"].ToString());
+                            var err = responce.Warningmess;
+                            var result = responce.ResponseLine;
+                        }
+                    }
+                }
+                
                 return dic["DeviceID"].ToString();
 
             }
             catch (Exception ex)
             {
-                return "-2";
+                return "-3";
             }
         }
 
@@ -205,6 +236,16 @@ namespace serverwcf
                 GetRandomNumber()
                 );
 
+            string namedevice;
+            if (String.IsNullOrEmpty(listdata[NameIDX]))
+            {
+                namedevice = "host new";
+            }
+            else
+            {
+                namedevice = listdata[NameIDX];
+            }
+
             try
             {
                 MyCom = new MLDBUtils.SQLCom(connectionString, "");
@@ -219,7 +260,7 @@ namespace serverwcf
                 MyCom.AddParam(Convert.ToInt64(deviceID));
                 MyCom.AddParam(Convert.ToInt32(codeA));
                 MyCom.AddParam(Convert.ToInt32(codeB));
-
+                MyCom.AddParam(Utils.TruncateLongString(namedevice, 50));
                 dic = MyCom.GetResultD();
 
                 if (dic == null || dic.Count == 0)
