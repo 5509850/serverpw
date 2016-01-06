@@ -53,6 +53,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_Ahost = new System.Windows.Forms.TextBox();
+            this.textBox_token = new System.Windows.Forms.TextBox();
+            this.button_paste = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -79,7 +81,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 225);
+            this.textBox1.Location = new System.Drawing.Point(12, 269);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(836, 39);
@@ -236,6 +238,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button_paste);
+            this.groupBox3.Controls.Add(this.textBox_token);
             this.groupBox3.Controls.Add(this.button_host_ok);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.textBox_Bhost);
@@ -244,7 +248,7 @@
             this.groupBox3.Controls.Add(this.textBox_Ahost);
             this.groupBox3.Location = new System.Drawing.Point(543, 109);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(305, 110);
+            this.groupBox3.Size = new System.Drawing.Size(305, 154);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "HOST";
@@ -304,11 +308,29 @@
             this.textBox_Ahost.TabIndex = 0;
             this.textBox_Ahost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_host_KeyPress);
             // 
+            // textBox_token
+            // 
+            this.textBox_token.Location = new System.Drawing.Point(28, 102);
+            this.textBox_token.Name = "textBox_token";
+            this.textBox_token.Size = new System.Drawing.Size(260, 20);
+            this.textBox_token.TabIndex = 6;
+            this.textBox_token.Text = "token";
+            // 
+            // button_paste
+            // 
+            this.button_paste.Location = new System.Drawing.Point(28, 129);
+            this.button_paste.Name = "button_paste";
+            this.button_paste.Size = new System.Drawing.Size(75, 23);
+            this.button_paste.TabIndex = 7;
+            this.button_paste.Text = "paste token";
+            this.button_paste.UseVisualStyleBackColor = true;
+            this.button_paste.Click += new System.EventHandler(this.button_paste_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 275);
+            this.ClientSize = new System.Drawing.Size(852, 314);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -356,6 +378,8 @@
         private System.Windows.Forms.Button button_host_ok;
         private System.Windows.Forms.TextBox textBox_hostname;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox_token;
+        private System.Windows.Forms.Button button_paste;
     }
 }
 

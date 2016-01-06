@@ -1,0 +1,5 @@
+D:\DEV\push\GCMServer\GCMServer\GCMTestServer\bin\GCMTestServer.dll.config
+D:\DEV\push\GCMServer\GCMServer\GCMTestServer\bin\GCMTestServer.dll
+D:\DEV\push\GCMServer\GCMServer\GCMTestServer\bin\GCMTestServer.pdb
+D:\DEV\push\GCMServer\GCMServer\GCMTestServer\obj\Release\GCMTestServer.dll
+D:\DEV\push\GCMServer\GCMServer\GCMTestServer\obj\Release\GCMTestServer.pdb

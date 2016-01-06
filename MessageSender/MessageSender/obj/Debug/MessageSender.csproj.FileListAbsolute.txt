@@ -1,0 +1,11 @@
+D:\DEV\MessageSender\MessageSender\bin\Debug\MessageSender.exe.config
+D:\DEV\MessageSender\MessageSender\bin\Debug\MessageSender.exe
+D:\DEV\MessageSender\MessageSender\bin\Debug\MessageSender.pdb
+D:\DEV\MessageSender\MessageSender\obj\Debug\MessageSender.csprojResolveAssemblyReference.cache
+D:\DEV\MessageSender\MessageSender\obj\Debug\MessageSender.Form1.resources
+D:\DEV\MessageSender\MessageSender\obj\Debug\MessageSender.Properties.Resources.resources
+D:\DEV\MessageSender\MessageSender\obj\Debug\MessageSender.csproj.GenerateResource.Cache
+D:\DEV\MessageSender\MessageSender\obj\Debug\MessageSender.exe
+D:\DEV\MessageSender\MessageSender\obj\Debug\MessageSender.pdb
+D:\DEV\MessageSender\MessageSender\bin\Debug\Newtonsoft.Json.dll
+D:\DEV\MessageSender\MessageSender\bin\Debug\Newtonsoft.Json.xml

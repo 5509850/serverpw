@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MessageSender.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ServerAPIKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AIzaSyCx6vxh0Yu41g8WJXJNXEefp315JslHwVE</Value>
+    </Setting>
+    <Setting Name="SenderID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">211352044714</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

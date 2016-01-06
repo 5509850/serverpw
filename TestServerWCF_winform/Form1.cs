@@ -278,7 +278,7 @@ namespace TestServerWCF_winform
         //for test only!!!!
         private string GetToken()
         {
-           return "dfgertgrf%$H$#YHG";
+            return textBox_token.Text;
         }
 
         //check codeA and codeB - if OK - add new deviceID(send push for host deviceID)
@@ -342,6 +342,11 @@ namespace TestServerWCF_winform
             //{
             //    e.Handled = true;
             //}
+        }
+
+        private void button_paste_Click(object sender, EventArgs e)
+        {
+            textBox_token.Text = Clipboard.GetText();
         }
     }
 }
