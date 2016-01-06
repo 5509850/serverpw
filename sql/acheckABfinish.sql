@@ -1,7 +1,7 @@
 USE [alexandr_gorbunov]
 GO
 
-/****** Object:  StoredProcedure [dbo].[checkABfinish]    Script Date: 01/05/2016 22:43:08 ******/
+/****** Object:  StoredProcedure [dbo].[acheckABfinish]    Script Date: 01/06/2016 21:44:39 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[checkABfinish]
+Create PROCEDURE [dbo].[acheckABfinish]
 	-- Add the parameters for the stored procedure here
 	@deviceID BIGINT,
 	@codeA INT,

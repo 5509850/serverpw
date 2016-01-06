@@ -150,11 +150,12 @@ namespace serverwcf
 
         private string FinishAddHostDevice(List<string> data)
         {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
             try
             {
                 MyCom = new MLDBUtils.SQLCom(connectionString, "");
-                Dictionary<string, object> dic = new Dictionary<string, object>();
-                MyCom.setCommand("checkABfinish");
+              
+                MyCom.setCommand("acheckABfinish");
 
                 long deviceID = 0;
                 if (!Int64.TryParse(data[DeviceIdIDX], out deviceID))
@@ -174,6 +175,14 @@ namespace serverwcf
 
                     return "-1";
                 }
+            }
+            catch (Exception ex)
+            {
+                return "-3";
+            }
+
+            try
+            {
                 //for send push after and active deviceID
                 long newDeviceId = 0;
                 if (Int64.TryParse(dic["DeviceID"].ToString(), out newDeviceId))
@@ -182,20 +191,43 @@ namespace serverwcf
                     {
                         if (dic["token"] != null)
                         {
-                            Utils.responseGCM responce = Utils.SendGCM(newDeviceId.ToString(), "http:\\tut.by", "title", dic["token"].ToString());
-                            var err = responce.Warningmess;
+                            string mess = newDeviceId.ToString();
+                            string url = "http:\\tut.by";
+                            string title = "title";
+                            Utils.responseGCM responce = Utils.SendGCM(mess, url, title, dic["token"].ToString());
+                            string err = responce.Warningmess;
+                            if (String.IsNullOrEmpty(err))
+                            {
+                                err = "OK";
+                            }
                             var result = responce.ResponseLine;
+                            if (String.IsNullOrEmpty(result))
+                            {
+                                result = "EMPTY";
+                            }
+                            string request = String.Format("{0};{1};{2}", mess, url, title);
+                            MyCom = new MLDBUtils.SQLCom(connectionString, "");
+                            MyCom.setCommand("aGCMlog");
+
+                            MyCom.AddParam(Utils.TruncateLongString(request, 50));
+                            MyCom.AddParam(Utils.TruncateLongString(result, 255));
+                            MyCom.AddParam(newDeviceId);
+                            MyCom.AddParam(Utils.TruncateLongString(err, 50));
+                            MyCom.AddParam(Utils.TruncateLongString("ADDdevice", 20));
+
+                            MyCom.ExecuteCommand();
                         }
                     }
                 }
-                
-                return dic["DeviceID"].ToString();
-
             }
             catch (Exception ex)
             {
-                return "-3";
+                return "-5|" + dic["DeviceID"].ToString();
             }
+                
+                return dic["DeviceID"].ToString();
+
+           
         }
 
         private string getA(List<string> listdata)
@@ -300,7 +332,8 @@ namespace serverwcf
                 }              
 
                 MyCom.AddParam(typedevice);
-                MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 300));
+                MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 500));
+                
                 MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));//AndroidID
                 MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 20)); //MacAdress                             
                 MyCom.AddParam(Convert.ToInt32(data[CodeAIDX]));
@@ -349,7 +382,7 @@ namespace serverwcf
                 MyCom.AddParam(Utils.TruncateLongString(data[EMAILIDX], 50));
                 MyCom.AddParam(Utils.TruncateLongString(data[PWDIDX], 50));
                 MyCom.AddParam(typeDevice);
-                MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 300));
+                MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 500));
                 MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));
                 MyCom.AddParam(Utils.TruncateLongString(data[NameIDX], 50));
 
@@ -418,7 +451,7 @@ namespace serverwcf
                 MyCom.AddParam(Utils.TruncateLongString(data[EMAILIDX], 50));
                 MyCom.AddParam(Utils.TruncateLongString(data[PWDIDX], 50));
                 MyCom.AddParam(typeDevice);
-                MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 300));
+                MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 500));
                 MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));
                 MyCom.AddParam(Utils.TruncateLongString(data[IpIDX], 50));
 

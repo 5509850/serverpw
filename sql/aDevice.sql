@@ -1,7 +1,7 @@
 USE [alexandr_gorbunov]
 GO
 
-/****** Object:  Table [dbo].[aDevice]    Script Date: 01/05/2016 22:44:50 ******/
+/****** Object:  Table [dbo].[aDevice]    Script Date: 01/06/2016 21:22:06 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,7 +12,7 @@ CREATE TABLE [dbo].[aDevice](
 	[deviceID] [bigint] IDENTITY(1,1) NOT NULL,
 	[TypeDeviceID] [int] NULL,
 	[userID] [bigint] NULL,
-	[Token] [nvarchar](50) NULL,
+	[Token] [nvarchar](512) NULL,
 	[AndroidIDMacaddress] [nvarchar](50) NULL,
 	[Name] [nvarchar](50) NULL,
 	[dateCreate] [smalldatetime] NULL,
