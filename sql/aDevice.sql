@@ -1,7 +1,7 @@
 USE [alexandr_gorbunov]
 GO
 
-/****** Object:  Table [dbo].[aDevice]    Script Date: 01/06/2016 21:22:06 ******/
+/****** Object:  Table [dbo].[aDevice]    Script Date: 01/07/2016 18:18:43 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -17,6 +17,7 @@ CREATE TABLE [dbo].[aDevice](
 	[Name] [nvarchar](50) NULL,
 	[dateCreate] [smalldatetime] NULL,
 	[isActive] [bit] NULL,
+	[version] [nchar](10) NULL,
  CONSTRAINT [PK_aDevice] PRIMARY KEY CLUSTERED 
 (
 	[deviceID] ASC

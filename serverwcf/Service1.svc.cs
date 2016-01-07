@@ -25,6 +25,21 @@ namespace serverwcf
         //-------------------------------code from host
 
         private const string FROMHOST = "5";
+        private const string FROMMASTER = "6";
+        //---------------------------------------------codes frome host
+        private const string codeActivation = "0";
+        //TODO:add all hsot codes here
+        //--------------------------------------------------end codes from host
+        const int host_code_idx = 1;
+        const int host_deviceID_idx = 2;
+        const int host_dataInfo_idx = 3;
+        const int host_TypeDeviceID_idx = 4;
+        const int host_Token_idx = 5;
+        const int host_AndroidID_idx = 6;
+        const int host_MacAddress_idx = 7;
+        const int host_ip_idx = 8;
+        const int host_Version_idx = 9;
+        //--------------------------------------------------------------------
 
         const int TYPEDATAIDX = 0;
         const int EMAILIDX = 2;
@@ -37,11 +52,7 @@ namespace serverwcf
         const int DeviceIdIDX = 9;
         const int CodeAIDX = 10;
         const int CodeBIDX = 11;
-        const int VersionIDX = 12;
-
-        const int TYPEDEVICE_AndroidHost = 5;
-
-
+        const int VersionIDX = 9;
 
         const int EXISTUSER = 0;
         const int ERRORSQL = -1;
@@ -145,12 +156,65 @@ namespace serverwcf
 
         private string RequestFromHost(List<string> data)
         {
-            throw new NotImplementedException();
+            try{
+                switch(data[host_code_idx])
+                 {
+                     case codeActivation:
+                         {
+                             return Activation(data);                             
+                         }
+                        //TODO: other codes from host here!!!!
+
+                 }
+            }
+            catch(Exception ex)
+            {
+              return ex.Message;
+            }
+            return String.Empty;
+        }
+
+        private string Activation(List<string> data)
+        {  
+                long deviceID = 0;
+                string result = String.Empty;
+                if (!Int64.TryParse(data[host_deviceID_idx], out deviceID))
+                {
+                    return String.Empty;
+                }               
+                Dictionary<string, object> dic = new Dictionary<string, object>();
+                try
+                {
+                    MyCom = new MLDBUtils.SQLCom(connectionString, "");
+                    MyCom.setCommand("aActivationDevice");
+
+                    MyCom.AddParam(deviceID);
+                    MyCom.AddParam(Convert.ToInt32(data[host_TypeDeviceID_idx]));
+                    MyCom.AddParam(Utils.TruncateLongString(data[host_Token_idx], 512));
+                    MyCom.AddParam(Utils.TruncateLongString(data[host_AndroidID_idx], 50));
+                    MyCom.AddParam(Utils.TruncateLongString(data[host_MacAddress_idx], 50));
+                    MyCom.AddParam(Utils.TruncateLongString(data[host_ip_idx], 50));
+                    MyCom.AddParam(Utils.TruncateLongString(data[host_Version_idx], 10));
+
+                    dic = MyCom.GetResultD();
+
+                    if (dic == null || dic.Count == 0)
+                    {
+                        return "-4";
+                    }
+                    result = dic["result"].ToString();
+                }           
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+                return result;
         }
 
         private string FinishAddHostDevice(List<string> data)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
+            string result = String.Empty;
             try
             {
                 MyCom = new MLDBUtils.SQLCom(connectionString, "");
@@ -172,9 +236,9 @@ namespace serverwcf
 
                 if (dic == null || dic.Count == 0)
                 {
-
                     return "-1";
                 }
+                result = dic["DeviceID"].ToString();
             }
             catch (Exception ex)
             {
@@ -194,23 +258,23 @@ namespace serverwcf
                             string mess = newDeviceId.ToString();
                             string url = "http:\\tut.by";
                             string title = "title";
-                            Utils.responseGCM responce = Utils.SendGCM(mess, url, title, dic["token"].ToString());
-                            string err = responce.Warningmess;
+                            Utils.responseGCM responcegsm = Utils.SendGCM(mess, url, title, dic["token"].ToString());
+                            string err = responcegsm.Warningmess;
                             if (String.IsNullOrEmpty(err))
                             {
                                 err = "OK";
                             }
-                            var result = responce.ResponseLine;
-                            if (String.IsNullOrEmpty(result))
+                            var responce = responcegsm.ResponseLine;
+                            if (String.IsNullOrEmpty(responce))
                             {
-                                result = "EMPTY";
+                                responce = "EMPTY";
                             }
                             string request = String.Format("{0};{1};{2}", mess, url, title);
                             MyCom = new MLDBUtils.SQLCom(connectionString, "");
                             MyCom.setCommand("aGCMlog");
 
                             MyCom.AddParam(Utils.TruncateLongString(request, 50));
-                            MyCom.AddParam(Utils.TruncateLongString(result, 255));
+                            MyCom.AddParam(Utils.TruncateLongString(responce, 255));
                             MyCom.AddParam(newDeviceId);
                             MyCom.AddParam(Utils.TruncateLongString(err, 50));
                             MyCom.AddParam(Utils.TruncateLongString("ADDdevice", 20));
@@ -224,10 +288,8 @@ namespace serverwcf
             {
                 return "-5|" + dic["DeviceID"].ToString();
             }
-                
-                return dic["DeviceID"].ToString();
 
-           
+            return result;
         }
 
         private string getA(List<string> listdata)
@@ -385,6 +447,7 @@ namespace serverwcf
                 MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 500));
                 MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));
                 MyCom.AddParam(Utils.TruncateLongString(data[NameIDX], 50));
+                MyCom.AddParam(Utils.TruncateLongString(data[VersionIDX], 10));
 
 
                 dic = MyCom.GetResultD();
@@ -429,9 +492,6 @@ namespace serverwcf
             return dev;
         }
 
-        //TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
         private Device Authentication(List<string> data)
         { 
             Device dev = new Device();
@@ -454,6 +514,7 @@ namespace serverwcf
                 MyCom.AddParam(Utils.TruncateLongString(data[TokenIDX], 500));
                 MyCom.AddParam(Utils.TruncateLongString(data[AndroidIDMacAddressIDX], 100));
                 MyCom.AddParam(Utils.TruncateLongString(data[IpIDX], 50));
+                MyCom.AddParam(Utils.TruncateLongString(data[VersionIDX], 10));
 
                 dic = MyCom.GetResultD();
 

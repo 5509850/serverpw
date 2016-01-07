@@ -1,7 +1,7 @@
 USE [alexandr_gorbunov]
 GO
 
-/****** Object:  Table [dbo].[aLog]    Script Date: 01/05/2016 22:46:01 ******/
+/****** Object:  Table [dbo].[aLog]    Script Date: 01/07/2016 18:01:27 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,6 +16,8 @@ CREATE TABLE [dbo].[aLog](
 	[userID] [bigint] NULL,
 	[code] [int] NULL,
 	[DeviceID] [bigint] NULL,
+	[macAddress] [nvarchar](50) NULL,
+	[version] [nchar](10) NULL,
  CONSTRAINT [PK_aLog] PRIMARY KEY CLUSTERED 
 (
 	[LogID] ASC

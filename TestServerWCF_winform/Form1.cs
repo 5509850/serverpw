@@ -17,14 +17,20 @@ namespace TestServerWCF_winform
 {
     public partial class Form1 : Form
     {
+        const string versionapp = "1.0";
+
         private const int REGISTRATION = 0;
         private const int AUTORIZATION = 1;
         private const int GETCODEA = 2;
         private const int GETCODEB = 3;
         private const int CHECKCODEAB = 4;
+        private const int FROMHOST = 5;
+
+        const int codeActivation = 0;
+
         private const int NEW_USER = 0;
         private const int TYPEDEVICE_WebClient = 1;
-        private const int TYPEDEVICE_AndroidHost = 5;
+        private const int TYPEDEVICE_AndroidHost = 5; //from db
         private const int EMPTY_TOKEN = 0;
         private const int EMPTY = 0;
 
@@ -49,11 +55,24 @@ namespace TestServerWCF_winform
             //http://habrahabr.ru/post/210760/
             //gethash
             string hash = Utils.GetHashString(data);
-            textBox1.Text = client.GetData(data, hash);
+            textBox_Result.Text = client.GetData(data, hash);
             client.Close();
         }
 
-        public static string GetMACAddress2()
+      
+        private static string GetIP()
+        {
+            string host = Dns.GetHostName();
+            IPHostEntry ip = Dns.GetHostEntry(host);
+            string ipaddress = ip.AddressList[0].ToString();
+            if (String.IsNullOrEmpty(ipaddress))
+            {
+                return "0.0.0.0";
+            }
+            return ipaddress;
+        }
+
+        private static string GetMACAddress()
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
             String sMacAddress = string.Empty;
@@ -67,32 +86,21 @@ namespace TestServerWCF_winform
             } return sMacAddress;
         }
 
-        private static string GetIP()
-        {
-            string host = Dns.GetHostName();
-            IPHostEntry ip = Dns.GetHostEntry(host);
-            string ipaddress = ip.AddressList[0].ToString();
-            if (String.IsNullOrEmpty(ipaddress))
-            {
-                return "0.0.0.0";
-            }
-            return ipaddress;
-        }
-
 
 
         private string Registration()
         {
-            return String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}",
+            return String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}|9|{9}",
                REGISTRATION,//0
                NEW_USER,//1
                textBox_email.Text,//2
                Utils.GetHashString(textBox_pwd.Text),//3
                TYPEDEVICE_WebClient,//4
                EMPTY_TOKEN,//5
-               GetMACAddress2(),//6
+               GetMACAddress(),//6
                textBox_name.Text,//7
-               GetIP()//8
+               GetIP(),//8
+               versionapp //9
                );
             /*|0|-|1|-|2|-|3|-|4|-|5|-|6|-|7|-|8|-|
 0 - typedata (0 - регистрация, 1 авторизация)
@@ -104,22 +112,23 @@ namespace TestServerWCF_winform
 6 - AndroidID/MacAddress
 7 - Name (device)
 8 - ip address login
-//9 - GUID
+9 - version
 */
         }
 
         private string Login()
         {
-            return String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}",
+            return String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}|9|{9}",
                AUTORIZATION,//0
                EMPTY,//1
                textBox_email.Text,//2
                Utils.GetHashString(textBox_pwd.Text),//3
                TYPEDEVICE_WebClient,//4
                EMPTY_TOKEN,//5
-               GetMACAddress2(),//6
+               GetMACAddress(),//6
                EMPTY,//7
-               GetIP()//8
+               GetIP(),//8
+               versionapp //9
                );          
         }
 
@@ -143,7 +152,7 @@ namespace TestServerWCF_winform
             3=PGP_key (open)
              */
 
-            textBox1.Text = client.GetData(data, hash);
+            textBox_Result.Text = client.GetData(data, hash);
             client.Close();
         }
 
@@ -160,7 +169,7 @@ namespace TestServerWCF_winform
             3=PGP_key (open)
              */
 
-            string Result = textBox1.Text = client.GetData(data, hash);
+            string Result = textBox_Result.Text = client.GetData(data, hash);
             client.Close();
 
 
@@ -189,7 +198,7 @@ namespace TestServerWCF_winform
             }
 
             Service1Client client = new Service1Client();
-            //TODO: !!!!!!!!!!!!!!! textBox_hostname добавить имя хоста!!! 
+       
             string data = String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}|9|{9}",
                GETCODEA,//0
                EMPTY,//1
@@ -251,7 +260,7 @@ namespace TestServerWCF_winform
                  * -2 error
                  * */
                 textBox_Bhost.Text =
-                    textBox1.Text = client.GetData(data, hash);
+                    textBox_Result.Text = client.GetData(data, hash);
                 client.Close();
             }
             catch (Exception ex)
@@ -320,7 +329,7 @@ namespace TestServerWCF_winform
             > 1  new Host DeviceID
              * 
              */
-                textBox1.Text = client.GetData(data, hash);
+                textBox_Result.Text = client.GetData(data, hash);
                 client.Close();
             }
             catch (Exception ex)
@@ -347,6 +356,59 @@ namespace TestServerWCF_winform
         private void button_paste_Click(object sender, EventArgs e)
         {
             textBox_token.Text = Clipboard.GetText();
+        }
+
+        private void button_confirmation_Click(object sender, EventArgs e)
+        {
+            long DeviceId = 0;
+            if (!Int64.TryParse(textBox_Result.Text, out DeviceId))
+            {
+                MessageBox.Show("Not valid DeviceID!");
+                return;
+            }
+            Activation(DeviceId);
+        }
+
+        private void Activation(long DeviceId)
+        {
+            try
+            {
+                Service1Client client = new Service1Client();
+               
+
+                string data = String.Format("0|{0}|1|{1}|2|{2}|3|{3}|4|{4}|5|{5}|6|{6}|7|{7}|8|{8}|9|{9}",
+                   FROMHOST,//0
+                   codeActivation,//1
+                   DeviceId,//2
+                   EMPTY,//3
+                   TYPEDEVICE_AndroidHost,//4
+                   GetToken(),//5
+                   GetAndroidID(),//6
+                   GetMACAddress(),//7
+                   GetIP(),//8
+                   versionapp //9
+                   );
+
+                string hash = Utils.GetHashString(data);
+
+                textBox_Result.Text = client.GetData(data, hash);
+                client.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            /*|0|-|1|-|2|-|3|-|4|-|5|-|6|-|7|-|8|-|
+0 - typedata (5 - FROMHOST, 6 FROMMASTER)
+1 -  code (0 - активация deviceID - isActive = true)
+2 - deviceID
+3 - dataInfo
+4 - TypeDeviceID
+5 - Token (null for host PC)
+6 - AndroidID  (null for host PC)
+7 - MacAddress  (null for host PC)
+8 - ip address
+9 app version*/
         }
     }
 }

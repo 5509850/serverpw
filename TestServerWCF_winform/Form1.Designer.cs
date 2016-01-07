@@ -30,7 +30,7 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_Result = new System.Windows.Forms.TextBox();
             this.textBox_email = new System.Windows.Forms.TextBox();
             this.textBox_pwd = new System.Windows.Forms.TextBox();
             this.textBox_name = new System.Windows.Forms.TextBox();
@@ -47,14 +47,15 @@
             this.textBox_codeA = new System.Windows.Forms.TextBox();
             this.button_addhost = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button_paste = new System.Windows.Forms.Button();
+            this.textBox_token = new System.Windows.Forms.TextBox();
             this.button_host_ok = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_Bhost = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_Ahost = new System.Windows.Forms.TextBox();
-            this.textBox_token = new System.Windows.Forms.TextBox();
-            this.button_paste = new System.Windows.Forms.Button();
+            this.button_confirmation = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -79,13 +80,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // textBox_Result
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 269);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(836, 39);
-            this.textBox1.TabIndex = 2;
+            this.textBox_Result.Location = new System.Drawing.Point(12, 269);
+            this.textBox_Result.Multiline = true;
+            this.textBox_Result.Name = "textBox_Result";
+            this.textBox_Result.Size = new System.Drawing.Size(836, 39);
+            this.textBox_Result.TabIndex = 2;
             // 
             // textBox_email
             // 
@@ -179,7 +180,7 @@
             this.button_master_ok.Name = "button_master_ok";
             this.button_master_ok.Size = new System.Drawing.Size(45, 23);
             this.button_master_ok.TabIndex = 6;
-            this.button_master_ok.Text = "OK";
+            this.button_master_ok.Text = "3 OK";
             this.button_master_ok.UseVisualStyleBackColor = true;
             this.button_master_ok.Click += new System.EventHandler(this.button_master_ok_Click);
             // 
@@ -232,12 +233,13 @@
             this.button_addhost.Name = "button_addhost";
             this.button_addhost.Size = new System.Drawing.Size(75, 23);
             this.button_addhost.TabIndex = 0;
-            this.button_addhost.Text = "Add Host";
+            this.button_addhost.Text = "1 Add Host";
             this.button_addhost.UseVisualStyleBackColor = true;
             this.button_addhost.Click += new System.EventHandler(this.button_addhost_Click);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button_confirmation);
             this.groupBox3.Controls.Add(this.button_paste);
             this.groupBox3.Controls.Add(this.textBox_token);
             this.groupBox3.Controls.Add(this.button_host_ok);
@@ -253,6 +255,25 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "HOST";
             // 
+            // button_paste
+            // 
+            this.button_paste.Location = new System.Drawing.Point(28, 129);
+            this.button_paste.Name = "button_paste";
+            this.button_paste.Size = new System.Drawing.Size(75, 23);
+            this.button_paste.TabIndex = 7;
+            this.button_paste.Text = "paste token";
+            this.button_paste.UseVisualStyleBackColor = true;
+            this.button_paste.Click += new System.EventHandler(this.button_paste_Click);
+            // 
+            // textBox_token
+            // 
+            this.textBox_token.Location = new System.Drawing.Point(28, 102);
+            this.textBox_token.Name = "textBox_token";
+            this.textBox_token.Size = new System.Drawing.Size(260, 20);
+            this.textBox_token.TabIndex = 6;
+            this.textBox_token.Text = "eajmEbsuzfE:APA91bEFnW3VYPt_nS8cvyzSs25yxPUW3YsYdqDAXF9bZxc3pm7fOfNQDnmr5W9N7zhVj" +
+    "oZLR61-6KpKg0eY5ZAf6B9jHQfUvFSGfTubPdG0BRZYNZJjYFe6mpokimB8gFBrXKj4UJmt";
+            // 
             // button_host_ok
             // 
             this.button_host_ok.Enabled = false;
@@ -260,7 +281,7 @@
             this.button_host_ok.Name = "button_host_ok";
             this.button_host_ok.Size = new System.Drawing.Size(56, 23);
             this.button_host_ok.TabIndex = 5;
-            this.button_host_ok.Text = "OK";
+            this.button_host_ok.Text = "2 OK";
             this.button_host_ok.UseVisualStyleBackColor = true;
             this.button_host_ok.Click += new System.EventHandler(this.button_host_ok_Click);
             // 
@@ -308,24 +329,15 @@
             this.textBox_Ahost.TabIndex = 0;
             this.textBox_Ahost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_host_KeyPress);
             // 
-            // textBox_token
+            // button_confirmation
             // 
-            this.textBox_token.Location = new System.Drawing.Point(28, 102);
-            this.textBox_token.Name = "textBox_token";
-            this.textBox_token.Size = new System.Drawing.Size(260, 20);
-            this.textBox_token.TabIndex = 6;
-            this.textBox_token.Text = "eajmEbsuzfE:APA91bEFnW3VYPt_nS8cvyzSs25yxPUW3YsYdqDAXF9bZxc3pm7fOfNQDnmr5W9N7zhVj" +
-    "oZLR61-6KpKg0eY5ZAf6B9jHQfUvFSGfTubPdG0BRZYNZJjYFe6mpokimB8gFBrXKj4UJmt";
-            // 
-            // button_paste
-            // 
-            this.button_paste.Location = new System.Drawing.Point(28, 129);
-            this.button_paste.Name = "button_paste";
-            this.button_paste.Size = new System.Drawing.Size(75, 23);
-            this.button_paste.TabIndex = 7;
-            this.button_paste.Text = "paste token";
-            this.button_paste.UseVisualStyleBackColor = true;
-            this.button_paste.Click += new System.EventHandler(this.button_paste_Click);
+            this.button_confirmation.Location = new System.Drawing.Point(156, 128);
+            this.button_confirmation.Name = "button_confirmation";
+            this.button_confirmation.Size = new System.Drawing.Size(132, 23);
+            this.button_confirmation.TabIndex = 8;
+            this.button_confirmation.Text = "4 confirmation";
+            this.button_confirmation.UseVisualStyleBackColor = true;
+            this.button_confirmation.Click += new System.EventHandler(this.button_confirmation_Click);
             // 
             // Form1
             // 
@@ -335,7 +347,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox_Result);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -356,7 +368,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_Result;
         private System.Windows.Forms.TextBox textBox_email;
         private System.Windows.Forms.TextBox textBox_pwd;
         private System.Windows.Forms.TextBox textBox_name;
@@ -381,6 +393,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox_token;
         private System.Windows.Forms.Button button_paste;
+        private System.Windows.Forms.Button button_confirmation;
     }
 }
 

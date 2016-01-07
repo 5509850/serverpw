@@ -1,7 +1,7 @@
 USE [alexandr_gorbunov]
 GO
 
-/****** Object:  Table [dbo].[aRegistrationHost]    Script Date: 01/06/2016 21:22:31 ******/
+/****** Object:  Table [dbo].[aRegistrationHost]    Script Date: 01/07/2016 18:30:53 ******/
 SET ANSI_NULLS ON
 GO
 
