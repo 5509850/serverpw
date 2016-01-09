@@ -16,6 +16,9 @@ namespace serverwcf
         [OperationContract]
         string GetData(string data, string hash);
 
+        [OperationContract]
+        string SaveGeoData(GEO geo, string hash);
+
         
         //[OperationContract]
         //CompositeType GetDataUsingDataContract(CompositeType composite);
@@ -23,6 +26,17 @@ namespace serverwcf
         // TODO: Add your service operations here
     }
 
+    //http://stackoverflow.com/questions/5579071/problem-in-getting-the-current-location-in-android
+    //http://stackoverflow.com/questions/1513485/how-do-i-get-the-current-gps-location-programmatically-in-android
+    [DataContract]
+    public class GEO
+    {
+        private long id;
+        private int localId;
+        private  double latitude;
+        private  double longitude;
+
+    }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]

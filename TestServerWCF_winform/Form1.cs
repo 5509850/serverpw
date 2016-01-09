@@ -398,7 +398,7 @@ namespace TestServerWCF_winform
             {
                 MessageBox.Show(ex.Message);
             }
-            /*|0|-|1|-|2|-|3|-|4|-|5|-|6|-|7|-|8|-|
+            /*|0|-|1|-|2|-|3|-|4|-|5|-|6|-|7|-|8|-|9|-{9}
 0 - typedata (5 - FROMHOST, 6 FROMMASTER)
 1 -  code (0 - активация deviceID - isActive = true)
 2 - deviceID
